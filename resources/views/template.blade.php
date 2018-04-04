@@ -11,7 +11,7 @@
 <body class="grey lighten-5">
 <header class="navbar-fixed">
 	<nav>
-		<div class="nav-wrapper blue">
+		<div class="nav-wrapper light-blue">
 			<a href="/" class="left hide-on-med-and-down brand-logo">twicla</a>
 			<a href="" class="hide-on-large-only" style="font-size: 1.2em;">twicla</a>
 			<a href="#" data-activates="mobile-menu" class="button-collapse left"><i class="material-icons">menu</i></a>
@@ -27,12 +27,12 @@
 <main class="container">
 	 @yield('content')
 </main>
-<footer class="page-footer grey darken-1" id="footer">
+<footer class="page-footer blue-grey darken-1" id="footer">
 	<div class="container">
 		<div class="row">
 			<div class="col l6 s12">
 				<h5 class="white-text">twicla</h5>
-				<p class="grey-text text-lighten-4">ツイッタラーのための出席管理ツール</p>
+				<p class="blue-grey-text text-lighten-4">ツイッタラーのための出席管理ツール</p>
 			</div>
 		</div>
 	</div>
