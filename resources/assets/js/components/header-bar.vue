@@ -1,7 +1,8 @@
 <template>
 	<div>
 		<ul class="sidenav" id="slide-out">
-			<li>ああああ</li>
+			<li><router-link class="sidenav-close" to="/">Top</router-link></li>
+			<li><router-link class="sidenav-close" to="/about">About</router-link></li>
 		</ul>
 		<header class="navbar-fixed">
 			<nav>
@@ -10,7 +11,8 @@
 					<a href="" class="hide-on-large-only" style="font-size: 1.2em;">twicla</a>
 					<a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 					<ul class="right hide-on-med-and-down">
-						<li>ああああ</li>
+						<li><router-link class="sidenav-close" to="/">Top</router-link></li>
+						<li><router-link class="sidenav-close" to="/about">About</router-link></li>
 					</ul>
 				</div>
 			</nav>

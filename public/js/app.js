@@ -14448,56 +14448,100 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("ul", { staticClass: "sidenav", attrs: { id: "slide-out" } }, [
+      _c(
+        "li",
+        [
+          _c(
+            "router-link",
+            { staticClass: "sidenav-close", attrs: { to: "/" } },
+            [_vm._v("Top")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "li",
+        [
+          _c(
+            "router-link",
+            { staticClass: "sidenav-close", attrs: { to: "/about" } },
+            [_vm._v("About")]
+          )
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("header", { staticClass: "navbar-fixed" }, [
+      _c("nav", [
+        _c("div", { staticClass: "nav-wrapper light-blue" }, [
+          _c(
+            "a",
+            {
+              staticClass: "left hide-on-med-and-down brand-logo",
+              attrs: { href: "/" }
+            },
+            [_vm._v("twicla")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "hide-on-large-only",
+              staticStyle: { "font-size": "1.2em" },
+              attrs: { href: "" }
+            },
+            [_vm._v("twicla")]
+          ),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c("ul", { staticClass: "right hide-on-med-and-down" }, [
+            _c(
+              "li",
+              [
+                _c(
+                  "router-link",
+                  { staticClass: "sidenav-close", attrs: { to: "/" } },
+                  [_vm._v("Top")]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              [
+                _c(
+                  "router-link",
+                  { staticClass: "sidenav-close", attrs: { to: "/about" } },
+                  [_vm._v("About")]
+                )
+              ],
+              1
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("ul", { staticClass: "sidenav", attrs: { id: "slide-out" } }, [
-        _c("li", [_vm._v("ああああ")])
-      ]),
-      _vm._v(" "),
-      _c("header", { staticClass: "navbar-fixed" }, [
-        _c("nav", [
-          _c("div", { staticClass: "nav-wrapper light-blue" }, [
-            _c(
-              "a",
-              {
-                staticClass: "left hide-on-med-and-down brand-logo",
-                attrs: { href: "/" }
-              },
-              [_vm._v("twicla")]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "hide-on-large-only",
-                staticStyle: { "font-size": "1.2em" },
-                attrs: { href: "" }
-              },
-              [_vm._v("twicla")]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "sidenav-trigger",
-                attrs: { href: "#", "data-target": "slide-out" }
-              },
-              [_c("i", { staticClass: "material-icons" }, [_vm._v("menu")])]
-            ),
-            _vm._v(" "),
-            _c("ul", { staticClass: "right hide-on-med-and-down" }, [
-              _c("li", [_vm._v("ああああ")])
-            ])
-          ])
-        ])
-      ])
-    ])
+    return _c(
+      "a",
+      {
+        staticClass: "sidenav-trigger",
+        attrs: { href: "#", "data-target": "slide-out" }
+      },
+      [_c("i", { staticClass: "material-icons" }, [_vm._v("menu")])]
+    )
   }
 ]
 render._withStripped = true
