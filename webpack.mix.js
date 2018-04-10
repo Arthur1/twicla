@@ -21,6 +21,5 @@ mix.js('resources/assets/js/app.js', 'public/js')
 .js([
 	'resources/assets/js/materialize.js',
 	'resources/assets/js/template.js',
-	'resources/assets/js/footerFixed.js'
 ], 'public/js')
 .sass('resources/assets/sass/materialize.scss', 'public/css');

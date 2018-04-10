@@ -60,12 +60,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 17);
+/******/ 	return __webpack_require__(__webpack_require__.s = 45);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 0:
+/***/ 1:
 /***/ (function(module, exports) {
 
 var g;
@@ -93,17 +93,16 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 17:
+/***/ 45:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(18);
-__webpack_require__(19);
-module.exports = __webpack_require__(20);
+__webpack_require__(46);
+module.exports = __webpack_require__(47);
 
 
 /***/ }),
 
-/***/ 18:
+/***/ 46:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -12364,94 +12363,15 @@ $jscomp.polyfill = function (e, r, p, m) {
 
   Range.init($('input[type=range]'));
 })(cash, M.anime);
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 
-/***/ 19:
+/***/ 47:
 /***/ (function(module, exports) {
 
 var elem = document.querySelector('.sidenav');
 var instance = M.Sidenav.init(elem, {});
-
-/***/ }),
-
-/***/ 20:
-/***/ (function(module, exports) {
-
-/*--------------------------------------------------------------------------*
- *  
- *  footerFixed.js
- *  
- *  MIT-style license. 
- *  
- *  2007 Kazuma Nishihata [to-R]
- *  http://blog.webcreativepark.net
- *  
- *--------------------------------------------------------------------------*/
-
-new function () {
-
-	var footerId = "footer";
-	//メイン
-	function footerFixed() {
-		//ドキュメントの高さ
-		var dh = document.getElementsByTagName("body")[0].clientHeight;
-		//フッターのtopからの位置
-		document.getElementById(footerId).style.top = "0px";
-		var ft = document.getElementById(footerId).offsetTop;
-		//フッターの高さ
-		var fh = document.getElementById(footerId).offsetHeight;
-		//ウィンドウの高さ
-		if (window.innerHeight) {
-			var wh = window.innerHeight;
-		} else if (document.documentElement && document.documentElement.clientHeight != 0) {
-			var wh = document.documentElement.clientHeight;
-		}
-		if (ft + fh < wh) {
-			document.getElementById(footerId).style.position = "relative";
-			document.getElementById(footerId).style.top = wh - fh - ft - 1 + "px";
-		}
-	}
-
-	//文字サイズ
-	function checkFontSize(func) {
-
-		//判定要素の追加	
-		var e = document.createElement("div");
-		var s = document.createTextNode("S");
-		e.appendChild(s);
-		e.style.visibility = "hidden";
-		e.style.position = "absolute";
-		e.style.top = "0";
-		document.body.appendChild(e);
-		var defHeight = e.offsetHeight;
-
-		//判定関数
-		function checkBoxSize() {
-			if (defHeight != e.offsetHeight) {
-				func();
-				defHeight = e.offsetHeight;
-			}
-		}
-		setInterval(checkBoxSize, 1000);
-	}
-
-	//イベントリスナー
-	function addEvent(elm, listener, fn) {
-		try {
-			elm.addEventListener(listener, fn, false);
-		} catch (e) {
-			elm.attachEvent("on" + listener, fn);
-		}
-	}
-
-	addEvent(window, "load", footerFixed);
-	addEvent(window, "load", function () {
-		checkFontSize(footerFixed);
-	});
-	addEvent(window, "resize", footerFixed);
-}();
 
 /***/ })
 
