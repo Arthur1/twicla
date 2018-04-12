@@ -28,6 +28,7 @@
 import Vue from 'vue'
 import router from './router'
 import http from './services/http.js'
+import userStore from './stores/userStore'
 
 
 Vue.component('header-bar', require('./components/header-bar.vue'))
@@ -36,4 +37,8 @@ Vue.component('footer-bar', require('./components/footer-bar.vue'))
 const app = new Vue({
   router,
   el: '#app',
+  created() {
+  	http.init()
+  	userStore.init()
+  },
 })
