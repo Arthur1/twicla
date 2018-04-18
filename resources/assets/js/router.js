@@ -8,6 +8,10 @@ export default new VueRouter({
 	routes: [
 		{ path: '/about', component: require('./components/About.vue') },
 		{ path: '/login', component: require('./components/Login.vue') },
+		{ path: '/register', component: require('./components/Register.vue') },
+		{ path: '/option', component: require('./components/Option.vue') },
+		{ path: '/schedule', component: require('./components/Schedule.vue') },
+
 	],
 	scrollBehavior (to, from, savedPosition) {
 		if (savedPosition) {

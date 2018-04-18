@@ -2644,6 +2644,27 @@ html {
           box-sizing: inherit;
 }
 
+body {
+  min-height: 100vh;
+}
+
+#app {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+main {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+}
+
 button,
 input,
 optgroup,
@@ -4809,39 +4830,39 @@ h6 a {
 }
 
 h1 {
-  font-size: 4.2rem;
+  font-size: 2.5rem;
   line-height: 110%;
-  margin: 2.8rem 0 1.68rem 0;
+  margin: 1.66666667rem 0 1rem 0;
 }
 
 h2 {
-  font-size: 3.56rem;
+  font-size: 2.2rem;
   line-height: 110%;
-  margin: 2.37333333rem 0 1.424rem 0;
+  margin: 1.46666667rem 0 0.88rem 0;
 }
 
 h3 {
-  font-size: 2.92rem;
+  font-size: 1.9rem;
   line-height: 110%;
-  margin: 1.94666667rem 0 1.168rem 0;
+  margin: 1.26666667rem 0 0.76rem 0;
 }
 
 h4 {
-  font-size: 2.28rem;
+  font-size: 1.6rem;
   line-height: 110%;
-  margin: 1.52rem 0 0.912rem 0;
+  margin: 1.06666667rem 0 0.64rem 0;
 }
 
 h5 {
-  font-size: 1.64rem;
+  font-size: 1.3rem;
   line-height: 110%;
-  margin: 1.09333333rem 0 0.656rem 0;
+  margin: 0.86666667rem 0 0.52rem 0;
 }
 
 h6 {
-  font-size: 1.15rem;
+  font-size: 1rem;
   line-height: 110%;
-  margin: 0.76666667rem 0 0.46rem 0;
+  margin: 0.66666667rem 0 0.4rem 0;
 }
 
 em {

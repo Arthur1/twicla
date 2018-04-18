@@ -10,9 +10,9 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body class="grey lighten-5">
-<div id="app" style="height: 100%">
+<div id="app">
 	<header-bar></header-bar>
-	<main class="container" style="min-height: calc(100% - 160px)">
+	<main class="container">
 		<router-view></router-view>
 	</main>
 	<footer-bar></footer-bar>

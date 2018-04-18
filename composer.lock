@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5a5668825fc2c74e5c7ba6860f139e8b",
+    "content-hash": "c52bb3e5174a6260029f61f16f37276a",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2404,6 +2404,74 @@
             "time": "2017-11-27T11:13:29+00:00"
         },
         {
+            "name": "timegridio/icalreader",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/timegridio/icalreader.git",
+                "reference": "a345345c04f19ad949fe0ab2c0c07ff97835e822"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/timegridio/icalreader/zipball/a345345c04f19ad949fe0ab2c0c07ff97835e822",
+                "reference": "a345345c04f19ad949fe0ab2c0c07ff97835e822",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~5.6|~7.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "laracasts/testdummy": "~2.3",
+                "nesbot/carbon": "~1.21",
+                "orchestra/testbench": "~3.2.0",
+                "phpunit/phpunit": "~4.0||~5.0",
+                "scrutinizer/ocular": "~1.1",
+                "squizlabs/php_codesniffer": "~2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "tests/PackageTestCase.php"
+                ],
+                "psr-4": {
+                    "Timegridio\\ICalReader\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ariel Vallese",
+                    "email": "alariva@timegrid.io",
+                    "homepage": "http://alariva.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "iCal reader wrapper for Laravel 5",
+            "homepage": "https://github.com/timegridio/icalreader",
+            "keywords": [
+                "api",
+                "calendar",
+                "date",
+                "events",
+                "ical",
+                "icalreader",
+                "parser",
+                "time",
+                "timegrid",
+                "timegridio"
+            ],
+            "time": "2016-07-10T01:10:52+00:00"
+        },
+        {
             "name": "tymon/jwt-auth",
             "version": "dev-develop",
             "source": {
@@ -4258,6 +4326,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "timegridio/icalreader": 20,
         "tymon/jwt-auth": 20
     },
     "prefer-stable": false,

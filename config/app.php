@@ -169,6 +169,7 @@ return [
          */
         //Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        Timegridio\ICalReader\ICalReaderServiceProvider::class,
 
         /*
          * Application Service Providers...

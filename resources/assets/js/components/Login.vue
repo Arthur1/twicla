@@ -11,7 +11,7 @@
 			</div>
 			<div class="col s7 input-field">
 				<input type="password" name="password" id="form_password" class="form-control" v-model="password" @keyup.enter="login" required autofocus>
-				<label for="form_password">E-mail</label>
+				<label for="form_password">Password</label>
 			</div>
 			<div class="col s12 input-field">
 				<button @click="login" type="submit" class="btn btn-primary">ログイン</button>
@@ -24,7 +24,7 @@
 	import http from '../services/http'
 
 	export default {
-		mounted () {
+		mounted() {
 			//this.fetchUsers()
 		},
 		data() {
@@ -36,7 +36,7 @@
 			}
 		},
 		methods: {
-			login () {
+			login() {
 				userStore.login(this.email, this.password, res => {
 					this.$router.push('/')
 				}, error => {
