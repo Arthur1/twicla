@@ -16566,7 +16566,7 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(68)
 /* template */
 var __vue_template__ = __webpack_require__(46)
 /* template functional */
@@ -16614,9 +16614,81 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n\tThis page describes who we are.\n")])
+  return _c("div", [
+    _c("h1", { staticClass: "light-blue-text" }, [_vm._v("設定")]),
+    _vm._v(" "),
+    _c("h2", { staticClass: "indigo-text" }, [_vm._v("icalファイル")]),
+    _vm._v(" "),
+    _c("p", [
+      _vm._v(
+        "\n\t\tOCW-iから取得できるicalファイルのurlを入力してください。\n\t"
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col s9 m7 input-field" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.ics,
+              expression: "ics"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", name: "ics", id: "form_ics", required: "" },
+          domProps: { value: _vm.ics },
+          on: {
+            keyup: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.registerIcs($event)
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.ics = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "form_ics" } }, [
+          _vm._v("icalファイルURL")
+        ]),
+        _vm._v(" "),
+        _vm.showAlert
+          ? _c("p", { staticClass: "text-red", attrs: { role: "alert" } }, [
+              _vm._v("\n\t\t\t\t" + _vm._s(_vm.alertMessage) + "\n\t\t\t")
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _vm._m(0)
+    ]),
+    _vm._v(" "),
+    _c("h2", { staticClass: "indigo-text" }, [_vm._v("Twitter連携")])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col s3 input-field" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("登録")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -17680,6 +17752,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				_this.alertMessage = '登録に失敗しました。';
 			});
 		}
+	}
+});
+
+/***/ }),
+/* 68 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			ics: '',
+			showAlert: false,
+			alertMessage: ''
+		};
 	}
 });
 
