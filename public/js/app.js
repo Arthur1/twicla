@@ -15285,7 +15285,6 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__stores_userStore__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_http__ = __webpack_require__(4);
 //
 //
 //
@@ -15307,7 +15306,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
 
 
 
@@ -16407,6 +16405,12 @@ var render = function() {
   return _c("div", { staticClass: "row" }, [
     _vm._m(0),
     _vm._v(" "),
+    _vm.showAlert
+      ? _c("p", { staticClass: "text-red", attrs: { role: "alert" } }, [
+          _vm._v("\n\t\t" + _vm._s(_vm.alertMessage) + "\n\t")
+        ])
+      : _vm._e(),
+    _vm._v(" "),
     _c("div", { staticClass: "col s12 m9 l7 input-field" }, [
       _c("input", {
         directives: [
@@ -16456,13 +16460,7 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("label", { attrs: { for: "form_email" } }, [_vm._v("メールアドレス")]),
-      _vm._v(" "),
-      _vm.showAlert
-        ? _c("p", { staticClass: "text-red", attrs: { role: "alert" } }, [
-            _vm._v("\n\t\t\t" + _vm._s(_vm.alertMessage) + "\n\t\t")
-          ])
-        : _vm._e()
+      _c("label", { attrs: { for: "form_email" } }, [_vm._v("メールアドレス")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col s12 m9 l7 input-field" }, [
@@ -16529,7 +16527,17 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(1)
+    _c("div", { staticClass: "col s12 input-field" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { type: "submit" },
+          on: { click: _vm.register }
+        },
+        [_vm._v("登録")]
+      )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -16539,18 +16547,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col s12" }, [
       _c("h1", { staticClass: "light-blue-text" }, [_vm._v("ユーザー登録")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col s12 input-field" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("登録")]
-      )
     ])
   }
 ]
@@ -17624,7 +17620,6 @@ if (false) {
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__stores_userStore__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_http__ = __webpack_require__(4);
 //
 //
 //
@@ -17654,30 +17649,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
+			name: '',
 			email: '',
 			password: '',
+			password_check: '',
 			showAlert: false,
 			alertMessage: ''
 		};
 	},
 
 	methods: {
-		register: function register() {},
-		login: function login() {
+		register: function register() {
 			var _this = this;
 
-			__WEBPACK_IMPORTED_MODULE_0__stores_userStore__["a" /* default */].login(this.email, this.password, function (res) {
-				_this.$router.push('/');
+			__WEBPACK_IMPORTED_MODULE_0__stores_userStore__["a" /* default */].register(this.name, this.email, this.password, function (res) {
+				__WEBPACK_IMPORTED_MODULE_0__stores_userStore__["a" /* default */].login(_this.email, _this.password, function (res) {
+					_this.$router.push('/');
+				}, function (error) {
+					_this.showAlert = true;
+					_this.alertMessage = 'ログインに失敗しました。';
+				});
 			}, function (error) {
 				_this.showAlert = true;
-				_this.alertMessage = 'メールアドレスかパスワードが違います。';
+				_this.alertMessage = '登録に失敗しました。';
 			});
 		}
 	}
