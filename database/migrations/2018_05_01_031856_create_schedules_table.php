@@ -14,12 +14,14 @@ class CreateSchedulesTable extends Migration
     public function up()
     {
         Schema::create('schedules', function (Blueprint $table) {
-            $table->string('user_id');
-            $table->string('class');
-            $table->tinyInteger('date');
-            $table->tinyInteger('start_period');
-            $table->tinyInteger('end_period');
-            $table->index(['user_id', 'date', 'start_period']);
+            $table->integer('user_id')->unsigned()->unique();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('class_name');
+            $table->date('date');
+            $table->integer('start_period');
+            $table->integer('end_period');
+            $table->string('place');
+            $table->text('description');
         });
     }
 

@@ -18,6 +18,23 @@ export default {
 		})
 	},
 
+	logout(successCb = null, errorCb = null) {
+		http.get('logout', () => {
+			localStorage.removeItem('jwt-token')
+			this.state.authenticated = false
+			successCb()
+		}, errorCb)
+	},
+
+	register(name, email, password, successCb = null, errorCb = null) {
+		var register_param = {name: name, email: email, password: password}
+		http.post('register', register_param, res => {
+			successCb()
+		}, error => {
+			errorCb()
+		})
+	},
+
 	setCurrentUser() {
 		http.get('me', res => {
 			this.state.user = res.data.user

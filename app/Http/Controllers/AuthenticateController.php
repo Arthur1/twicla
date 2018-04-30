@@ -30,6 +30,15 @@ class AuthenticateController extends Controller
         return response()->json(compact('user', 'token'));
     }
 
+    public function register(Request $request)
+    {
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
+    }
+
     public function getCurrentUser()
     {
         $user = JWTAuth::parseToken()->authenticate();

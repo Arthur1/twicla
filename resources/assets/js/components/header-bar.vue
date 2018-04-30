@@ -27,7 +27,7 @@
 			<li><router-link class="sidenav-close" to="/schedule"><i class="material-icons">announcement</i>講義日程</router-link></li>
 			<li v-if="userState.authenticated"><router-link class="sidenav-close" to="/option"><i class="material-icons">build</i>設定</router-link></li>
 			<li class="divider"></li>
-			<li v-if="userState.authenticated"><router-link class="sidenav-close" to="/logout">ログアウト</router-link></li>
+			<li v-if="userState.authenticated"><a class="sidenav-close" @click="logout()">ログアウト</a></li>
 			<li v-if="! userState.authenticated"><router-link class="sidenav-close" to="/login">ログイン</router-link></li>
 			<li v-if="! userState.authenticated"><router-link class="sidenav-close" to="/register">ユーザー登録</router-link></li>
 
@@ -41,7 +41,7 @@
 					<ul class="right hide-on-med-and-down">
 						<li><router-link class="sidenav-close" to="/about">About</router-link></li>
 						<li v-if="userState.authenticated"><router-link class="sidenav-close" to="/option">設定</router-link></li>
-						<li v-if="userState.authenticated"><router-link class="sidenav-close" to="/logout">ログアウト</router-link></li>
+						<li v-if="userState.authenticated"><a class="sidenav-close" @click="logout()">ログアウト</a></li>
 						<li v-if="! userState.authenticated"><router-link class="sidenav-close" to="/login">ログイン</router-link></li>
 						<li v-if="! userState.authenticated"><router-link class="sidenav-close" to="/register">ユーザー登録</router-link></li>
 					</ul>
@@ -57,6 +57,14 @@ export default {
 	data() {
 		return {
 			userState: userStore.state
+		}
+	},
+
+	methods: {
+		logout() {
+			userStore.logout(() => {
+				this.$router.push('/login')
+			})
 		}
 	}
 }
