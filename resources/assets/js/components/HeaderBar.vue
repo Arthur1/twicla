@@ -55,15 +55,10 @@
 </template>
 <script>
 	export default {
-		data() {
-			return {
-				authenticated: false,
-				user: {}
-			}
-		},
-
 		mounted() {
 			this.$store.dispatch('setCurrentUser')
+			let el = document.querySelector('.sidenav');
+			let instance = M.Sidenav.init(el, {});
 		},
 
 		methods: {
