@@ -527,8 +527,8 @@ module.exports = g;
 	login: function login(email, password) {
 		var _this = this;
 
-		var successCb = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-		var errorCb = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+		var successCb = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
+		var errorCb = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function () {};
 
 		var login_param = { email: email, password: password };
 		__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].post('authenticate', login_param, function (res) {
@@ -542,8 +542,8 @@ module.exports = g;
 	logout: function logout() {
 		var _this2 = this;
 
-		var successCb = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-		var errorCb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+		var successCb = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function () {};
+		var errorCb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
 
 		__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].get('logout', function () {
 			localStorage.removeItem('jwt-token');
@@ -552,8 +552,8 @@ module.exports = g;
 		}, errorCb);
 	},
 	register: function register(name, email, password) {
-		var successCb = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-		var errorCb = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+		var successCb = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function () {};
+		var errorCb = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : function () {};
 
 		var register_param = { name: name, email: email, password: password };
 		__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].post('register', register_param, function (res) {
@@ -562,12 +562,15 @@ module.exports = g;
 			errorCb();
 		});
 	},
-	setCurrentUser: function setCurrentUser() {
+	setCurrentUser: function setCurrentUser(successCb) {
 		var _this3 = this;
 
 		__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].get('me', function (res) {
 			_this3.state.user = res.data.user;
 			_this3.state.authenticated = true;
+			successCb;
+		}, function (error) {
+			console.log('error');
 		});
 	},
 
@@ -16669,26 +16672,23 @@ var render = function() {
           : _vm._e()
       ]),
       _vm._v(" "),
-      _vm._m(0)
+      _c("div", { staticClass: "col s3 input-field" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "submit" },
+            on: { click: _vm.registerIcs }
+          },
+          [_vm._v("登録")]
+        )
+      ])
     ]),
     _vm._v(" "),
     _c("h2", { staticClass: "indigo-text" }, [_vm._v("Twitter連携")])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col s3 input-field" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("登録")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -17736,6 +17736,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		};
 	},
 
+
 	methods: {
 		register: function register() {
 			var _this = this;
@@ -17761,6 +17762,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__stores_userStore__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_http__ = __webpack_require__(4);
 //
 //
 //
@@ -17784,6 +17787,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
@@ -17791,6 +17797,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			showAlert: false,
 			alertMessage: ''
 		};
+	},
+	mounted: function mounted() {
+		__WEBPACK_IMPORTED_MODULE_0__stores_userStore__["a" /* default */].setCurrentUser(function () {
+			var _this = this;
+
+			__WEBPACK_IMPORTED_MODULE_1__services_http__["a" /* default */].get('ics/get?user_id=' + __WEBPACK_IMPORTED_MODULE_0__stores_userStore__["a" /* default */].state.user.id, function (res) {
+				_this.ics = res.ics_url;
+			}, function (error) {
+				console.log('error');
+			});
+		});
+	},
+
+
+	methods: {
+		registerIcs: function registerIcs() {
+			var param = { user_id: __WEBPACK_IMPORTED_MODULE_0__stores_userStore__["a" /* default */].state.user.id, ics: this.ics };
+			__WEBPACK_IMPORTED_MODULE_1__services_http__["a" /* default */].post('ics/register', param, function () {
+				console.log('success');
+			}, function () {
+				console.log('failed');
+			});
+		}
 	}
 });
 

@@ -23,5 +23,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::get('schedule', 'ScheduleController@show');
     Route::group(['middleware' => 'jwt.auth'], function () {
         Route::get('me',  'AuthenticateController@getCurrentUser');
+        Route::post('ics/register', 'IcsController@register');
+        Route::get('ics/get', 'IcsController@get');
     });
 });

@@ -7,7 +7,7 @@ export default {
 		authenticated: false,
 	},
 
-	login(email, password, successCb = null, errorCb = null) {
+	login(email, password, successCb = () => {}, errorCb = () => {}) {
 		var login_param = {email: email, password: password}
 		http.post('authenticate', login_param, res => {
 			this.state.user = res.data.user
@@ -18,7 +18,7 @@ export default {
 		})
 	},
 
-	logout(successCb = null, errorCb = null) {
+	logout(successCb = () => {}, errorCb = () => {}) {
 		http.get('logout', () => {
 			localStorage.removeItem('jwt-token')
 			this.state.authenticated = false
@@ -26,7 +26,7 @@ export default {
 		}, errorCb)
 	},
 
-	register(name, email, password, successCb = null, errorCb = null) {
+	register(name, email, password, successCb = () => {}, errorCb = () => {}) {
 		var register_param = {name: name, email: email, password: password}
 		http.post('register', register_param, res => {
 			successCb()
@@ -35,10 +35,13 @@ export default {
 		})
 	},
 
-	setCurrentUser() {
+	setCurrentUser(successCb) {
 		http.get('me', res => {
 			this.state.user = res.data.user
 			this.state.authenticated = true
+			successCb
+		}, error => {
+			console.log('error')
 		})
 	},
 

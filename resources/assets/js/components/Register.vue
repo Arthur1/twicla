@@ -41,6 +41,7 @@
 				alertMessage: '',
 			}
 		},
+
 		methods: {
 			register() {
 				userStore.register(this.name, this.email, this.password, res => {

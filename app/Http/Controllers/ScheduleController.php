@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Timegridio\ICalReader\ICalEvents;
+use ICal\ICal;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class ScheduleController extends Controller
 {
@@ -46,10 +48,11 @@ class ScheduleController extends Controller
      */
     public function show()
     {
-    	$ical = app()->make('ical');
-    	//$ical = new ICalEvents();
-		$ical->loadUrl('https://secure.ocw.titech.ac.jp/ocwi/index.php?module=Ocwi&action=Webcal&iCalendarId=76955358a28280d07b913d958b9a152d5aaf5e53');
-		return \Response::json($ical->events());
+		$ical = new ICal();
+		$ical->initUrl('http://localhost/ocw.ics');
+		//return \Response::json($ical->events());
+		echo $ical->calendarName()."<br>";
+		echo $ical->calendarDescription()."<br>";
     }
 
     /**

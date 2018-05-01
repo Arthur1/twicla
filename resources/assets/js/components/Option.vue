@@ -14,13 +14,16 @@
 				</p>
 			</div>
 			<div class="col s3 input-field">
-				<button type="submit" class="btn btn-primary">登録</button>
+				<button type="submit" @click="registerIcs" class="btn btn-primary">登録</button>
 			</div>
 		</div>
 		<h2 class="indigo-text">Twitter連携</h2>
 	</div>
 </template>
 <script>
+	import userStore from '../stores/userStore'
+	import http from '../services/http'
+
 	export default {
 		data() {
 			return {
@@ -28,6 +31,27 @@
 				showAlert: false,
 				alertMessage: '',
 			}
+		},
+
+		mounted() {
+			userStore.setCurrentUser(function() {
+				http.get('ics/get?user_id=' + userStore.state.user.id, res => {
+					this.ics = res.ics_url
+				}, error => {
+					console.log('error')
+				})
+			})
+		},
+
+		methods: {
+			registerIcs() {
+				let param = {user_id: userStore.state.user.id, ics: this.ics}
+				http.post('ics/register', param, () => {
+					console.log('success')
+				}, () => {
+					console.log('failed')
+				})
+			},
 		},
 	}
 </script>
