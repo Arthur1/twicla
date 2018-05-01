@@ -27,7 +27,7 @@
 				</div>
 			</li>
 			<li><router-link class="sidenav-close" to="/about"><i class="material-icons">announcement</i>About</router-link></li>
-			<li><router-link class="sidenav-close" to="/schedule"><i class="material-icons">announcement</i>講義日程</router-link></li>
+			<li><router-link class="sidenav-close" to="/schedule"><i class="material-icons">event</i>講義日程</router-link></li>
 			<li v-if="this.$store.getters.isAuthenticated"><router-link class="sidenav-close" to="/option"><i class="material-icons">build</i>設定</router-link></li>
 			<li class="divider"></li>
 			<li v-if="this.$store.getters.isAuthenticated"><a class="sidenav-close" @click="logout()" id="logout">ログアウト</a></li>
@@ -43,6 +43,7 @@
 					<a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 					<ul class="right hide-on-med-and-down">
 						<li><router-link class="sidenav-close" to="/about">About</router-link></li>
+						<li v-if="this.$store.getters.isAuthenticated"><router-link class="sidenav-close" to="/schedule">講義日程</router-link></li>
 						<li v-if="this.$store.getters.isAuthenticated"><router-link class="sidenav-close" to="/option">設定</router-link></li>
 						<li v-if="this.$store.getters.isAuthenticated"><a class="sidenav-close" @click="logout()">ログアウト</a></li>
 						<li v-if="! this.$store.getters.isAuthenticated"><router-link class="sidenav-close" to="/login">ログイン</router-link></li>

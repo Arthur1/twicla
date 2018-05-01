@@ -6,12 +6,12 @@
 			OCW-iから取得できるicalファイルのurlを入力してください。
 		</p>
 		<div class="row">
-			<div class="col s9 m7 input-field">
+			<div class="col s12 m9 input-field">
 				<input type="text" name="ics" id="form_ics" class="form-control" v-model="ics" @keyup.enter="registerIcs" required autofocus>
 				<label for="form_ics">icalファイルURL</label>
 			</div>
-			<div class="col s3 input-field">
-				<button type="submit" @click="registerIcs" class="btn btn-primary">登録</button>
+			<div class="col s12 m3 input-field">
+				<button type="submit" @click="registerIcs" class="btn btn-primary"><i class="material-icons right">send</i>登録</button>
 			</div>
 		</div>
 		<h2 class="indigo-text">Twitter連携</h2>
@@ -31,6 +31,7 @@
 			this.$store.dispatch('setCurrentUser').then(() => {
 				http.get('ics/get?user_id=' + this.$store.getters.getUser.id, {}, res => {
 					this.ics = res.data.ics_url
+					M.updateTextFields()
 				}, error => {
 					M.toast({html: '登録情報の確認に失敗しました', classes: 'red white-text'})
 				})

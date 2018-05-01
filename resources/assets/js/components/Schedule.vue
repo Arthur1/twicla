@@ -37,7 +37,10 @@
 		mounted() {
 			// initialize datepicker
 			let el = document.getElementById('form_date')
-			let instance = M.Datepicker.init(el, {format: 'mmm d, yyyy'})
+			let option = {
+				format: 'mmm d, yyyy',
+			}
+			let instance = M.Datepicker.init(el, option)
 			el.onchange = () => {
 				this.datePick = el.value
 			}

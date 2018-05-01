@@ -15748,6 +15748,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		this.$store.dispatch('setCurrentUser').then(function () {
 			__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].get('ics/get?user_id=' + _this.$store.getters.getUser.id, {}, function (res) {
 				_this.ics = res.data.ics_url;
+				M.updateTextFields();
 			}, function (error) {
 				M.toast({ html: '登録情報の確認に失敗しました', classes: 'red white-text' });
 			});
@@ -16679,7 +16680,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col s9 m7 input-field" }, [
+      _c("div", { staticClass: "col s12 m9 input-field" }, [
         _c("input", {
           directives: [
             {
@@ -16720,7 +16721,7 @@ var render = function() {
         _c("label", { attrs: { for: "form_ics" } }, [_vm._v("icalファイルURL")])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col s3 input-field" }, [
+      _c("div", { staticClass: "col s12 m3 input-field" }, [
         _c(
           "button",
           {
@@ -16728,7 +16729,10 @@ var render = function() {
             attrs: { type: "submit" },
             on: { click: _vm.registerIcs }
           },
-          [_vm._v("登録")]
+          [
+            _c("i", { staticClass: "material-icons right" }, [_vm._v("send")]),
+            _vm._v("登録")
+          ]
         )
       ])
     ]),
@@ -16840,7 +16844,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 		// initialize datepicker
 		var el = document.getElementById('form_date');
-		var instance = M.Datepicker.init(el, { format: 'mmm d, yyyy' });
+		var option = {
+			format: 'mmm d, yyyy'
+		};
+		var instance = M.Datepicker.init(el, option);
 		el.onchange = function () {
 			_this.datePick = el.value;
 		};
@@ -18505,6 +18512,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	mounted: function mounted() {
@@ -18597,9 +18605,7 @@ var render = function() {
             "router-link",
             { staticClass: "sidenav-close", attrs: { to: "/schedule" } },
             [
-              _c("i", { staticClass: "material-icons" }, [
-                _vm._v("announcement")
-              ]),
+              _c("i", { staticClass: "material-icons" }, [_vm._v("event")]),
               _vm._v("講義日程")
             ]
           )
@@ -18709,6 +18715,23 @@ var render = function() {
               ],
               1
             ),
+            _vm._v(" "),
+            this.$store.getters.isAuthenticated
+              ? _c(
+                  "li",
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "sidenav-close",
+                        attrs: { to: "/schedule" }
+                      },
+                      [_vm._v("講義日程")]
+                    )
+                  ],
+                  1
+                )
+              : _vm._e(),
             _vm._v(" "),
             this.$store.getters.isAuthenticated
               ? _c(
