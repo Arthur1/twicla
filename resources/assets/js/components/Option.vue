@@ -34,6 +34,8 @@
 				}, error => {
 					M.toast({html: '登録情報の確認に失敗しました', classes: 'red white-text'})
 				})
+			}).catch(() => {
+				this.$router.push('/login')
 			})
 		},
 

@@ -21,7 +21,7 @@
 	window.Laravel = {};
 	window.Laravel.csrfToken = "{{ csrf_token() }}";
 </script>
-<script src="/js/app.js"></script>
 <script src="/js/materialize.js"></script>
+<script src="/js/app.js"></script>
 </body>
 </html>

@@ -15148,9 +15148,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n\tThis page describes who we are.\n")])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("h1", { staticClass: "light-blue-text" }, [_vm._v("twiclaとは")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "\n\t\ttwiclaは、手軽にTwitterと連携できる東工大専用の出席管理システムです。\n\t"
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -16671,17 +16686,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
+			datePick: '',
 			schedule: {}
 		};
 	},
 	mounted: function mounted() {
 		var _this = this;
+
+		// initialize datepicker
+		var el = document.getElementById('form_date');
+		var instance = M.Datepicker.init(el, { format: 'mmm d, yyyy' });
+		el.onchange = function () {
+			_this.datePick = el.value;
+		};
 
 		this.$store.dispatch('setCurrentUser').then(function () {
 			__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].get('schedule?user_id=' + _this.$store.getters.getUser.id, {}, function (res) {
@@ -16689,6 +16726,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			}, function (error) {
 				M.toast({ html: '「設定」よりicalファイルの登録をしてください', classes: 'red white-text' });
 			});
+		}).catch(function () {
+			M.toast({ html: 'ログインしてください', classes: 'red white-text' });
+			_this.$router.push('/login');
 		});
 	},
 
@@ -16696,12 +16736,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	methods: {
 		date: function date(timestamp) {
 			var date = new Date(timestamp * 1000);
-			//let year  = date.getFullYear();
 			var month = date.getMonth() + 1;
 			var day = date.getDate();
+			return month + '月' + day + '日';
+		},
+		time: function time(timestamp) {
+			var date = new Date(timestamp * 1000);
 			var hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
 			var min = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
-			return month + '月' + day + '日 ' + hour + ':' + min;
+			return hour + ':' + min;
+		},
+		scheduleFilter: function scheduleFilter(schedule, needle) {
+			if (Object.keys(schedule).length === 0 || needle === '') return schedule;
+			var pickDate = new Date(needle);
+			return schedule.filter(function (record) {
+				var date = new Date(record.dtstart_array[2] * 1000);
+				return date.getYear() === pickDate.getYear() && date.getMonth() === pickDate.getMonth() && date.getDate() === pickDate.getDate();
+			});
 		}
 	}
 });
@@ -16717,22 +16768,58 @@ var render = function() {
   return _c("div", [
     _c("h1", { staticClass: "light-blue-text" }, [_vm._v("スケジュール")]),
     _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
     _c(
       "ul",
       { staticClass: "collection" },
-      _vm._l(_vm.schedule, function(record) {
+      _vm._l(_vm.scheduleFilter(_vm.schedule, _vm.datePick), function(record) {
         return _c("li", { staticClass: "collection-item" }, [
           _c("div", [_vm._v(_vm._s(record.summary))]),
           _vm._v(" "),
           _c("div", { staticClass: "grey-text" }, [
-            _vm._v(_vm._s(_vm.date(record.dtstart_array[2])))
+            _c("i", { staticClass: "material-icons tiny" }, [
+              _vm._v("access_time")
+            ]),
+            _vm._v(
+              "\n\t\t\t\t" +
+                _vm._s(_vm.date(record.dtstart_array[2])) +
+                "\n\t\t\t\t" +
+                _vm._s(_vm.time(record.dtstart_array[2])) +
+                "～" +
+                _vm._s(_vm.time(record.dtend_array[2])) +
+                "\n\t\t\t"
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "grey-text" }, [
+            _c("i", { staticClass: "material-icons tiny" }, [
+              _vm._v("location_city")
+            ]),
+            _vm._v("\n\t\t\t\t" + _vm._s(record.location) + "\n\t\t\t")
           ])
         ])
       })
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col s12 input-field" }, [
+        _c("input", {
+          staticClass: "datepicker",
+          attrs: { type: "text", id: "form_date", name: "date" }
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "form_date" } }, [_vm._v("日時")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -17212,6 +17299,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			}, function (error) {
 				M.toast({ html: '登録情報の確認に失敗しました', classes: 'red white-text' });
 			});
+		}).catch(function () {
+			_this.$router.push('/login');
 		});
 	},
 
