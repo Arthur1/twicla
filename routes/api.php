@@ -14,16 +14,19 @@ use Illuminate\Http\Request;
 */
 
 /*Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+	return $request->user();
 });*/
 
-Route::group(['middleware' => 'api'], function () {
-    Route::post('authenticate',  'AuthenticateController@authenticate');
-    Route::post('register', 'AuthenticateController@register');
-    Route::get('schedule', 'ScheduleController@show');
-    Route::group(['middleware' => 'jwt.auth'], function () {
-        Route::get('me',  'AuthenticateController@getCurrentUser');
-        Route::post('ics/register', 'IcsController@register');
-        Route::get('ics/get', 'IcsController@get');
-    });
+Route::group(['middleware' => 'api'], function() {
+	// 認証が不要
+	Route::post('authenticate',  'AuthenticateController@authenticate');
+	Route::post('register', 'AuthenticateController@register');
+	Route::get('schedule', 'ScheduleController@list');
+	// 認証が必要
+	Route::group(['middleware' => 'jwt.auth'], function() {
+		Route::get('me',  'AuthenticateController@getCurrentUser');
+		Route::post('ics/register', 'IcsController@register');
+		Route::get('ics/get', 'IcsController@get');
+	});
+
 });

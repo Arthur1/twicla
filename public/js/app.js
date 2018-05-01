@@ -16577,15 +16577,7 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _c("label", { attrs: { for: "form_ics" } }, [
-          _vm._v("icalファイルURL")
-        ]),
-        _vm._v(" "),
-        _vm.showAlert
-          ? _c("p", { staticClass: "text-red", attrs: { role: "alert" } }, [
-              _vm._v("\n\t\t\t\t" + _vm._s(_vm.alertMessage) + "\n\t\t\t")
-            ])
-          : _vm._e()
+        _c("label", { attrs: { for: "form_ics" } }, [_vm._v("icalファイルURL")])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col s3 input-field" }, [
@@ -16667,11 +16659,52 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_http__ = __webpack_require__(4);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			schedule: {}
+		};
+	},
+	mounted: function mounted() {
+		var _this = this;
+
+		this.$store.dispatch('setCurrentUser').then(function () {
+			__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].get('schedule?user_id=' + _this.$store.getters.getUser.id, {}, function (res) {
+				_this.schedule = res.data;
+			}, function (error) {
+				M.toast({ html: '「設定」よりicalファイルの登録をしてください', classes: 'red white-text' });
+			});
+		});
+	},
+
+
+	methods: {
+		date: function date(timestamp) {
+			var date = new Date(timestamp * 1000);
+			//let year  = date.getFullYear();
+			var month = date.getMonth() + 1;
+			var day = date.getDate();
+			var hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+			var min = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+			return month + '月' + day + '日 ' + hour + ':' + min;
+		}
+	}
+});
 
 /***/ }),
 /* 49 */
@@ -16681,7 +16714,23 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", { staticClass: "light-blue-text" }, [_vm._v("スケジュール")])
+  return _c("div", [
+    _c("h1", { staticClass: "light-blue-text" }, [_vm._v("スケジュール")]),
+    _vm._v(" "),
+    _c(
+      "ul",
+      { staticClass: "collection" },
+      _vm._l(_vm.schedule, function(record) {
+        return _c("li", { staticClass: "collection-item" }, [
+          _c("div", [_vm._v(_vm._s(record.summary))]),
+          _vm._v(" "),
+          _c("div", { staticClass: "grey-text" }, [
+            _vm._v(_vm._s(_vm.date(record.dtstart_array[2])))
+          ])
+        ])
+      })
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -17145,18 +17194,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
-			ics: '',
-			showAlert: false,
-			alertMessage: ''
+			ics: ''
 		};
 	},
 	mounted: function mounted() {
@@ -17166,7 +17210,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].get('ics/get?user_id=' + _this.$store.getters.getUser.id, {}, function (res) {
 				_this.ics = res.data.ics_url;
 			}, function (error) {
-				console.log('error');
+				M.toast({ html: '登録情報の確認に失敗しました', classes: 'red white-text' });
 			});
 		});
 	},
