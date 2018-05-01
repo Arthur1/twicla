@@ -39,10 +39,6 @@ class IcsController extends Controller
 	public function get(Request $request)
 	{
 		$user_id = $request->user_id;
-		//var_dump($user_id);
-		//$record = Option::where('user_id', $user_id)->first();
-		$record = Option::first();
-		//var_dump($record);
-		return \Response::json($record);
+		return \Response::json(Option::find($user_id));
 	}
 }

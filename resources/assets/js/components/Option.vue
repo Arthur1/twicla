@@ -34,7 +34,7 @@
 
 		mounted() {
 			this.$store.dispatch('setCurrentUser').then(() => {
-				http.get('ics/get', {user_id: this.$store.getters.getUser.id}, res => {
+				http.get('ics/get?user_id=' + this.$store.getters.getUser.id, {}, res => {
 					this.ics = res.data.ics_url
 				}, error => {
 					console.log('error')

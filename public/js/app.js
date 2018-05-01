@@ -17182,7 +17182,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		var _this = this;
 
 		this.$store.dispatch('setCurrentUser').then(function () {
-			__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].get('ics/get', { user_id: _this.$store.getters.getUser.id }, function (res) {
+			__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].get('ics/get?user_id=' + _this.$store.getters.getUser.id, {}, function (res) {
 				_this.ics = res.data.ics_url;
 			}, function (error) {
 				console.log('error');
