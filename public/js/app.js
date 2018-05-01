@@ -16565,7 +16565,13 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "text", name: "ics", id: "form_ics", required: "" },
+          attrs: {
+            type: "text",
+            name: "ics",
+            id: "form_ics",
+            required: "",
+            autofocus: ""
+          },
           domProps: { value: _vm.ics },
           on: {
             keyup: function($event) {
@@ -17171,6 +17177,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			showAlert: false,
 			alertMessage: ''
 		};
+	},
+	mounted: function mounted() {
+		var _this = this;
+
+		this.$store.dispatch('setCurrentUser').then(function () {
+			__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].get('ics/get', { user_id: _this.$store.getters.getUser.id }, function (res) {
+				_this.ics = res.data.ics_url;
+			}, function (error) {
+				console.log('error');
+			});
+		});
+	},
+
+
+	methods: {
+		registerIcs: function registerIcs() {
+			var params = { user_id: this.$store.getters.getUser.id, ics: this.ics };
+			__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].post('ics/register', params, function () {
+				console.log('success');
+			}, function () {
+				console.log('failed');
+			});
+		}
 	}
 });
 
@@ -18159,7 +18188,6 @@ var index_esm = {
 
 	mutations: {
 		login: function login(state, user) {
-			console.log(user);
 			state.authenticated = true;
 			state.user = user;
 		},

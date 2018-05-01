@@ -7,7 +7,7 @@
 		</p>
 		<div class="row">
 			<div class="col s9 m7 input-field">
-				<input type="text" name="ics" id="form_ics" class="form-control" v-model="ics" @keyup.enter="registerIcs" required>
+				<input type="text" name="ics" id="form_ics" class="form-control" v-model="ics" @keyup.enter="registerIcs" required autofocus>
 				<label for="form_ics">icalファイルURL</label>
 				<p class="text-red" role="alert" v-if="showAlert">
 					{{ alertMessage }}
@@ -32,10 +32,10 @@
 			}
 		},
 
-		/*mounted() {
-			userStore.setCurrentUser(function() {
-				http.get('ics/get?user_id=' + userStore.state.user.id, res => {
-					this.ics = res.ics_url
+		mounted() {
+			this.$store.dispatch('setCurrentUser').then(() => {
+				http.get('ics/get', {user_id: this.$store.getters.getUser.id}, res => {
+					this.ics = res.data.ics_url
 				}, error => {
 					console.log('error')
 				})
@@ -44,13 +44,13 @@
 
 		methods: {
 			registerIcs() {
-				let param = {user_id: userStore.state.user.id, ics: this.ics}
-				http.post('ics/register', param, () => {
+				let params = {user_id: this.$store.getters.getUser.id, ics: this.ics}
+				http.post('ics/register', params, () => {
 					console.log('success')
 				}, () => {
 					console.log('failed')
 				})
 			},
-		},*/
+		},
 	}
 </script>

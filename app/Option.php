@@ -22,4 +22,7 @@ class Option extends Model
      * 入力を受け付けるColumn
      */
     protected $fillable = ['user_id', 'ics_url'];
+
+    protected $primaryKey = 'user_id';
+    public $incrementing = false;
 }

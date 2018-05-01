@@ -8,7 +8,6 @@ export default {
 
 	mutations: {
 		login(state, user) {
-			console.log(user)
 			state.authenticated = true
 			state.user = user
 		},

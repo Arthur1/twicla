@@ -40,7 +40,8 @@ class IcsController extends Controller
 	{
 		$user_id = $request->user_id;
 		//var_dump($user_id);
-		$record = Option::where('user_id', $user_id)->first();
+		//$record = Option::where('user_id', $user_id)->first();
+		$record = Option::first();
 		//var_dump($record);
 		return \Response::json($record);
 	}
