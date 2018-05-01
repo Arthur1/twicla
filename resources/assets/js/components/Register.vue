@@ -28,8 +28,6 @@
 	</div>
 </template>
 <script>
-	import userStore from '../stores/userStore'
-
 	export default {
 		data() {
 			return {
@@ -44,20 +42,20 @@
 
 		methods: {
 			register() {
-				userStore.register(this.name, this.email, this.password, res => {
-					userStore.login(this.email, this.password, res => {
+				let register_params = {name: this.name, email: this.email, password: this.password}
+				this.$store.dispatch('register', register_params).then(() => {
+					let login_params = {email: this.email, password: this.password}
+					this.$store.dispatch('login', login_params).then(
 						this.$router.push('/')
-					}, error => {
+					).catch(() => {
 						this.showAlert = true
 						this.alertMessage = 'ログインに失敗しました。'
 					})
-				}, error => {
+				}).catch(() => {
 					this.showAlert = true
 					this.alertMessage = '登録に失敗しました。'
 				})
 			},
-
-
 		},
 	}
 </script>

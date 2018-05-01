@@ -12,8 +12,8 @@ export default {
 		}).then(successCb).catch(errorCb)
 	},
 
-	get(url, successCb = null, errorCb = null) {
-		return this.request('get', url, {}, successCb, errorCb)
+	get(url, data, successCb = null, errorCb = null) {
+		return this.request('get', url, data, successCb, errorCb)
 	},
 
 	post(url, data, successCb = null, errorCb = null) {
@@ -48,7 +48,6 @@ export default {
 	    	const token = response.headers['Authorization'] || response.data['token']
 	    	if (token) {
 	    		localStorage.setItem('jwt-token', token)
-	    		window.cookie = 'token=' + token
 	    	}
 
 	    	return response

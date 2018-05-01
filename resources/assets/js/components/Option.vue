@@ -21,7 +21,6 @@
 	</div>
 </template>
 <script>
-	import userStore from '../stores/userStore'
 	import http from '../services/http'
 
 	export default {
@@ -33,7 +32,7 @@
 			}
 		},
 
-		mounted() {
+		/*mounted() {
 			userStore.setCurrentUser(function() {
 				http.get('ics/get?user_id=' + userStore.state.user.id, res => {
 					this.ics = res.ics_url
@@ -52,6 +51,6 @@
 					console.log('failed')
 				})
 			},
-		},
+		},*/
 	}
 </script>

@@ -20,8 +20,6 @@
 	</div>
 </template>
 <script>
-	import userStore from '../stores/userStore'
-
 	export default {
 		data() {
 			return {
@@ -31,15 +29,17 @@
 				alertMessage: '',
 			}
 		},
+
 		methods: {
 			login() {
-				userStore.login(this.email, this.password, res => {
+				let params = {email: this.email, password: this.password}
+				this.$store.dispatch('login', params).then(() => {
 					this.$router.push('/')
-				}, error => {
+				}).catch(() => {
 					this.showAlert = true
 					this.alertMessage = 'メールアドレスかパスワードが違います。'
 				})
 			},
-		}
+		},
 	}
 </script>

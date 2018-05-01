@@ -28,17 +28,17 @@
 import Vue from 'vue'
 import router from './router'
 import http from './services/http.js'
-import userStore from './stores/userStore'
+import store from './stores/index.js'
 
 
-Vue.component('header-bar', require('./components/header-bar.vue'))
-Vue.component('footer-bar', require('./components/footer-bar.vue'))
+Vue.component('header-bar', require('./components/HeaderBar.vue'))
+Vue.component('footer-bar', require('./components/FooterBar.vue'))
 
 const app = new Vue({
   router,
+  store,
   el: '#app',
   created() {
   	http.init()
-  	userStore.init()
   },
 })
