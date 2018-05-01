@@ -21,13 +21,10 @@ export default {
 	actions: {
 		login({commit}, login_params) {
 			return new Promise((resolve, reject) => {
-				//console.log(login_params)
-				//console.log(commit)
 				http.post('authenticate', login_params, res => {
 					commit('login', res.data.user)
 					resolve()
 				}, error => {
-					console.log('Login Error')
 					reject()
 				})
 			})
@@ -40,7 +37,6 @@ export default {
 					commit('logout')
 					resolve()
 				}, error => {
-					console.log('Logout Error')
 					reject()
 				})
 			})
@@ -51,7 +47,6 @@ export default {
 				http.post('register', register_params, res => {
 					resolve()
 				}, error => {
-					console.log('Register Error')
 					reject()
 				})
 			})
@@ -63,7 +58,6 @@ export default {
 					commit('login', res.data.user)
 					resolve()
 				}, error => {
-					console.log('set current user error')
 					reject()
 				})
 			})

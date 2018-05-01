@@ -7,6 +7,9 @@
 	width: 100%;
 	height: 100%;
 }
+#logout {
+	cursor: pointer;
+}
 </style>
 <template>
 	<div>
@@ -27,7 +30,7 @@
 			<li><router-link class="sidenav-close" to="/schedule"><i class="material-icons">announcement</i>講義日程</router-link></li>
 			<li v-if="this.$store.getters.isAuthenticated"><router-link class="sidenav-close" to="/option"><i class="material-icons">build</i>設定</router-link></li>
 			<li class="divider"></li>
-			<li v-if="this.$store.getters.isAuthenticated"><a class="sidenav-close" @click="logout()">ログアウト</a></li>
+			<li v-if="this.$store.getters.isAuthenticated"><a class="sidenav-close" @click="logout()" id="logout">ログアウト</a></li>
 			<li v-if="! this.$store.getters.isAuthenticated"><router-link class="sidenav-close" to="/login">ログイン</router-link></li>
 			<li v-if="! this.$store.getters.isAuthenticated"><router-link class="sidenav-close" to="/register">ユーザー登録</router-link></li>
 
@@ -67,6 +70,9 @@
 			logout() {
 				this.$store.dispatch('logout').then(() => {
 					this.$router.push('/login')
+					M.toast({html: 'ログアウトしました', classes: 'teal white-text'})
+				}).catch(() => {
+					M.toast({html: 'ログアウトに失敗しました', classes: 'red white-text'})
 				})
 			},
 		},

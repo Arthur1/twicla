@@ -12156,7 +12156,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //Vue.component('example-component', require('./components/ExampleComponent.vue'));//
 
 //const app = new Vue({
-//    router,
+//  router,
 //	el: '#app',
 //	render: h => h(require('./app.vue')),
 //})
@@ -12170,12 +12170,12 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('header-bar', __webpack_re
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('footer-bar', __webpack_require__(77));
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
-  router: __WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */],
-  store: __WEBPACK_IMPORTED_MODULE_3__stores_index_js__["a" /* default */],
-  el: '#app',
-  created: function created() {
-    __WEBPACK_IMPORTED_MODULE_2__services_http_js__["a" /* default */].init();
-  }
+	router: __WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */],
+	store: __WEBPACK_IMPORTED_MODULE_3__stores_index_js__["a" /* default */],
+	el: '#app',
+	created: function created() {
+		__WEBPACK_IMPORTED_MODULE_2__services_http_js__["a" /* default */].init();
+	}
 });
 
 /***/ }),
@@ -15231,17 +15231,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
 			email: '',
-			password: '',
-			showAlert: false,
-			alertMessage: ''
+			password: ''
 		};
 	},
 
@@ -15252,10 +15247,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			var params = { email: this.email, password: this.password };
 			this.$store.dispatch('login', params).then(function () {
+				M.toast({ html: 'ログインしました', classes: 'teal white-text' });
 				_this.$router.push('/');
 			}).catch(function () {
-				_this.showAlert = true;
-				_this.alertMessage = 'メールアドレスかパスワードが違います。';
+				M.toast({ html: 'ログインに失敗しました。メールアドレスとパスワードが正しいかお確かめください。', classes: 'red white-text' });
 			});
 		}
 	}
@@ -16163,7 +16158,7 @@ var render = function() {
     _c("h1", { staticClass: "light-blue-text" }, [_vm._v("ログイン")]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col s7 input-field" }, [
+      _c("div", { staticClass: "col s12 m9 l7 input-field" }, [
         _c("input", {
           directives: [
             {
@@ -16201,16 +16196,12 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _c("label", { attrs: { for: "form_email" } }, [_vm._v("E-mail")]),
-        _vm._v(" "),
-        _vm.showAlert
-          ? _c("p", { staticClass: "text-red", attrs: { role: "alert" } }, [
-              _vm._v("\n\t\t\t\t" + _vm._s(_vm.alertMessage) + "\n\t\t\t")
-            ])
-          : _vm._e()
+        _c("label", { attrs: { for: "form_email" } }, [
+          _vm._v("メールアドレス")
+        ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col s7 input-field" }, [
+      _c("div", { staticClass: "col s12 m9 l7 input-field" }, [
         _c("input", {
           directives: [
             {
@@ -16248,7 +16239,7 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _c("label", { attrs: { for: "form_password" } }, [_vm._v("Password")])
+        _c("label", { attrs: { for: "form_password" } }, [_vm._v("パスワード")])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col s12 input-field" }, [
@@ -16332,12 +16323,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
     _vm._m(0),
-    _vm._v(" "),
-    _vm.showAlert
-      ? _c("p", { staticClass: "text-red", attrs: { role: "alert" } }, [
-          _vm._v("\n\t\t" + _vm._s(_vm.alertMessage) + "\n\t")
-        ])
-      : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "col s12 m9 l7 input-field" }, [
       _c("input", {
@@ -17102,9 +17087,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -17112,9 +17094,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			name: '',
 			email: '',
 			password: '',
-			password_check: '',
-			showAlert: false,
-			alertMessage: ''
+			password_check: ''
 		};
 	},
 
@@ -17126,13 +17106,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var register_params = { name: this.name, email: this.email, password: this.password };
 			this.$store.dispatch('register', register_params).then(function () {
 				var login_params = { email: _this.email, password: _this.password };
-				_this.$store.dispatch('login', login_params).then(_this.$router.push('/')).catch(function () {
-					_this.showAlert = true;
-					_this.alertMessage = 'ログインに失敗しました。';
+				_this.$store.dispatch('login', login_params).then(function () {
+					_this.$router.push('/');
+					M.toast({ html: '登録完了しました', classes: 'teal white-text' });
+				}).catch(function () {
+					M.toast({ html: 'ログインに失敗しました。メニューから再度ログインしてください', classes: 'red white-text' });
 				});
 			}).catch(function () {
-				_this.showAlert = true;
-				_this.alertMessage = '登録に失敗しました。';
+				M.toast({ html: 'ユーザー登録に失敗しました', classes: 'red white-text' });
 			});
 		}
 	}
@@ -17194,10 +17175,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	methods: {
 		registerIcs: function registerIcs() {
 			var params = { user_id: this.$store.getters.getUser.id, ics: this.ics };
-			__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].post('ics/register', params, function () {
-				console.log('success');
-			}, function () {
-				console.log('failed');
+			__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].post('ics/register', params, function (res) {
+				M.toast({ html: 'icalファイルの登録に成功しました', classes: 'teal white-text' });
+			}, function (error) {
+				M.toast({ html: 'icalファイルの登録に失敗しました。URLが正しいか確認してください', classes: 'red white-text' });
 			});
 		}
 	}
@@ -18202,13 +18183,10 @@ var index_esm = {
 			var commit = _ref.commit;
 
 			return new Promise(function (resolve, reject) {
-				//console.log(login_params)
-				//console.log(commit)
 				__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].post('authenticate', login_params, function (res) {
 					commit('login', res.data.user);
 					resolve();
 				}, function (error) {
-					console.log('Login Error');
 					reject();
 				});
 			});
@@ -18222,7 +18200,6 @@ var index_esm = {
 					commit('logout');
 					resolve();
 				}, function (error) {
-					console.log('Logout Error');
 					reject();
 				});
 			});
@@ -18234,7 +18211,6 @@ var index_esm = {
 				__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].post('register', register_params, function (res) {
 					resolve();
 				}, function (error) {
-					console.log('Register Error');
 					reject();
 				});
 			});
@@ -18247,7 +18223,6 @@ var index_esm = {
 					commit('login', res.data.user);
 					resolve();
 				}, function (error) {
-					console.log('set current user error');
 					reject();
 				});
 			});
@@ -18351,7 +18326,7 @@ exports = module.exports = __webpack_require__(53)(false);
 
 
 // module
-exports.push([module.i, "\n#user-icon-initial[data-v-78a221df] {\r\n\tdisplay: block;\r\n\ttext-align: center;\r\n\tfont-size: 2.0em;\r\n\tline-height: 60px;\r\n\twidth: 100%;\r\n\theight: 100%;\n}\r\n", ""]);
+exports.push([module.i, "\n#user-icon-initial[data-v-78a221df] {\r\n\tdisplay: block;\r\n\ttext-align: center;\r\n\tfont-size: 2.0em;\r\n\tline-height: 60px;\r\n\twidth: 100%;\r\n\theight: 100%;\n}\n#logout[data-v-78a221df] {\r\n\tcursor: pointer;\n}\r\n", ""]);
 
 // exports
 
@@ -18362,6 +18337,9 @@ exports.push([module.i, "\n#user-icon-initial[data-v-78a221df] {\r\n\tdisplay: b
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
 //
 //
 //
@@ -18433,6 +18411,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			this.$store.dispatch('logout').then(function () {
 				_this.$router.push('/login');
+				M.toast({ html: 'ログアウトしました', classes: 'teal white-text' });
+			}).catch(function () {
+				M.toast({ html: 'ログアウトに失敗しました', classes: 'red white-text' });
 			});
 		}
 	}
@@ -18542,6 +18523,7 @@ var render = function() {
               "a",
               {
                 staticClass: "sidenav-close",
+                attrs: { id: "logout" },
                 on: {
                   click: function($event) {
                     _vm.logout()

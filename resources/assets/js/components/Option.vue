@@ -45,10 +45,10 @@
 		methods: {
 			registerIcs() {
 				let params = {user_id: this.$store.getters.getUser.id, ics: this.ics}
-				http.post('ics/register', params, () => {
-					console.log('success')
-				}, () => {
-					console.log('failed')
+				http.post('ics/register', params, res => {
+					M.toast({html: 'icalファイルの登録に成功しました', classes: 'teal white-text'})
+				}, error => {
+					M.toast({html: 'icalファイルの登録に失敗しました。URLが正しいか確認してください', classes: 'red white-text'})
 				})
 			},
 		},

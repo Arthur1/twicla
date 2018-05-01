@@ -3,9 +3,6 @@
 		<div class="col s12">
 			<h1 class="light-blue-text">ユーザー登録</h1>
 		</div>
-		<p class="text-red" role="alert" v-if="showAlert">
-			{{ alertMessage }}
-		</p>
 		<div class="col s12 m9 l7 input-field">
 			<input type="text" name="name" id="form_name" class="form-control" v-model="name" required>
 			<label for="form_name">ユーザ名</label>
@@ -35,8 +32,6 @@
 				email: '',
 				password: '',
 				password_check: '',
-				showAlert: false,
-				alertMessage: '',
 			}
 		},
 
@@ -45,15 +40,14 @@
 				let register_params = {name: this.name, email: this.email, password: this.password}
 				this.$store.dispatch('register', register_params).then(() => {
 					let login_params = {email: this.email, password: this.password}
-					this.$store.dispatch('login', login_params).then(
+					this.$store.dispatch('login', login_params).then(() => {
 						this.$router.push('/')
-					).catch(() => {
-						this.showAlert = true
-						this.alertMessage = 'ログインに失敗しました。'
+						M.toast({html: '登録完了しました', classes: 'teal white-text'})
+					}).catch(() => {
+						M.toast({html: 'ログインに失敗しました。メニューから再度ログインしてください', classes: 'red white-text'})
 					})
 				}).catch(() => {
-					this.showAlert = true
-					this.alertMessage = '登録に失敗しました。'
+					M.toast({html: 'ユーザー登録に失敗しました', classes: 'red white-text'})
 				})
 			},
 		},

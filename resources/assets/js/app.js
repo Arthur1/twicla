@@ -20,7 +20,7 @@
 //Vue.component('example-component', require('./components/ExampleComponent.vue'));//
 
 //const app = new Vue({
-//    router,
+//  router,
 //	el: '#app',
 //	render: h => h(require('./app.vue')),
 //})
@@ -35,10 +35,10 @@ Vue.component('header-bar', require('./components/HeaderBar.vue'))
 Vue.component('footer-bar', require('./components/FooterBar.vue'))
 
 const app = new Vue({
-  router,
-  store,
-  el: '#app',
-  created() {
-  	http.init()
-  },
+	router,
+	store,
+	el: '#app',
+	created() {
+		http.init()
+	},
 })
