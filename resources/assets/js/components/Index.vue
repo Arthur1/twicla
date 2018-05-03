@@ -1,25 +1,8 @@
 <template>
 	<div>
-		<div class="row">
-			<div class="col s12 input-field">
-				<input type="text" class="datepicker" id="form_date" name="date">
-				<label for="form_date">日時</label>
-			</div>
-		</div>
-		<ul class="collection">
-			<li v-for="record in scheduleFilter(schedule, datePick)" class="collection-item">
-				<div>{{ record.summary }}</div>
-				<div class="grey-text">
-					<i class="material-icons tiny">access_time</i>
-					{{ date(record.dtstart_array[2]) }}
-					{{ time(record.dtstart_array[2]) }}～{{ time(record.dtend_array[2]) }}
-				</div>
-				<div class="grey-text">
-					<i class="material-icons tiny">location_city</i>
-					{{ record.location }}
-				</div>
-			</li>
-		</ul>
+		<p>
+			とっぷぺーじ
+		</p>
 	</div>
 </template>
 <script>
@@ -34,16 +17,6 @@
 		},
 
 		mounted() {
-			// initialize datepicker
-			let el = document.getElementById('form_date')
-			let option = {
-				format: 'mmm d, yyyy',
-			}
-			let instance = M.Datepicker.init(el, option)
-			el.onchange = () => {
-				this.datePick = el.value
-			}
-
 			this.$store.dispatch('setCurrentUser').then(() => {
 				http.get('schedule?user_id=' + this.$store.getters.getUser.id, {}, res => {
 					this.schedule = res.data

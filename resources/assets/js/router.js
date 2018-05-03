@@ -5,14 +5,40 @@ Vue.use(VueRouter)
 
 export default new VueRouter({
 	mode: 'history',
-	routes: [
-		{ path: '/about', component: require('./components/About.vue') },
-		{ path: '/login', component: require('./components/Login.vue') },
-		{ path: '/register', component: require('./components/Register.vue') },
-		{ path: '/option', component: require('./components/Option.vue') },
-		{ path: '/schedule', component: require('./components/Schedule.vue') },
 
+	routes: [
+		{
+			path: '/',
+			name: 'Twicla',
+			component: require('./components/Index.vue'),
+		},
+		{
+			path: '/about',
+			name: 'About',
+			component: require('./components/About.vue'),
+		},
+		{
+			path: '/login',
+			name: 'ログイン',
+			component: require('./components/Login.vue'),
+		},
+		{
+			path: '/register',
+			name: 'ユーザー登録',
+			component: require('./components/Register.vue'),
+		},
+		{
+			path: '/option',
+			name: '設定',
+			component: require('./components/Option.vue'),
+		},
+		{
+			path: '/schedule',
+			name: '講義予定',
+			component: require('./components/Schedule.vue'),
+		},
 	],
+
 	scrollBehavior (to, from, savedPosition) {
 		if (savedPosition) {
 			return savedPosition

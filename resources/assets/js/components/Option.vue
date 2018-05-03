@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<h1 class="light-blue-text">設定</h1>
 		<h2 class="indigo-text">icalファイル</h2>
 		<p>
 			OCW-iから取得できるicalファイルのurlを入力してください。

@@ -1,8 +1,5 @@
 <template>
 	<div class="row">
-		<div class="col s12">
-			<h1 class="light-blue-text">ユーザー登録</h1>
-		</div>
 		<div class="col s12 m9 l7 input-field">
 			<input type="text" name="name" id="form_name" class="form-control" v-model="name" required>
 			<label for="form_name">ユーザ名</label>

@@ -1,16 +1,3 @@
-<style scoped>
-#user-icon-initial {
-	display: block;
-	text-align: center;
-	font-size: 2.0em;
-	line-height: 60px;
-	width: 100%;
-	height: 100%;
-}
-#logout {
-	cursor: pointer;
-}
-</style>
 <template>
 	<div>
 		<ul class="sidenav" id="slide-out">
@@ -27,7 +14,7 @@
 				</div>
 			</li>
 			<li><router-link class="sidenav-close" to="/about"><i class="material-icons">announcement</i>About</router-link></li>
-			<li><router-link class="sidenav-close" to="/schedule"><i class="material-icons">event</i>講義日程</router-link></li>
+			<li v-if="this.$store.getters.isAuthenticated"><router-link class="sidenav-close" to="/schedule"><i class="material-icons">event</i>講義日程</router-link></li>
 			<li v-if="this.$store.getters.isAuthenticated"><router-link class="sidenav-close" to="/option"><i class="material-icons">build</i>設定</router-link></li>
 			<li class="divider"></li>
 			<li v-if="this.$store.getters.isAuthenticated"><a class="sidenav-close" @click="logout()" id="logout">ログアウト</a></li>
@@ -38,8 +25,11 @@
 		<header class="navbar-fixed">
 			<nav>
 				<div class="nav-wrapper light-blue">
-					<a href="/" class="left hide-on-med-and-down brand-logo">twicla</a>
-					<a href="" class="hide-on-large-only" style="font-size: 1.2em;">twicla</a>
+					<div class="hide-on-med-and-down left">
+						<router-link to="/" class="breadcrumb">Twicla</router-link>
+						<router-link v-if="this.$route.path !== '/'" :to="this.$route.path" class="breadcrumb">{{ this.$route.name}}</router-link>
+					</div>
+					<router-link :to="this.$route.path" class="hide-on-large-only" style="font-size: 1.3em;">{{ this.$route.name }}</router-link>
 					<a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 					<ul class="right hide-on-med-and-down">
 						<li><router-link class="sidenav-close" to="/about">About</router-link></li>
@@ -74,3 +64,16 @@
 		},
 	}
 </script>
+<style scoped>
+	#user-icon-initial {
+		display: block;
+		text-align: center;
+		font-size: 2.0em;
+		line-height: 60px;
+		width: 100%;
+		height: 100%;
+	}
+	#logout {
+		cursor: pointer;
+	}
+</style>

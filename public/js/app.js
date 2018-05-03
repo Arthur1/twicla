@@ -12166,7 +12166,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('header-bar', __webpack_require__(54));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('footer-bar', __webpack_require__(62));
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 	router: __WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */],
@@ -12452,7 +12451,33 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
 	mode: 'history',
-	routes: [{ path: '/about', component: __webpack_require__(18) }, { path: '/login', component: __webpack_require__(20) }, { path: '/register', component: __webpack_require__(23) }, { path: '/option', component: __webpack_require__(26) }, { path: '/schedule', component: __webpack_require__(48) }],
+
+	routes: [{
+		path: '/',
+		name: 'Twicla',
+		component: __webpack_require__(70)
+	}, {
+		path: '/about',
+		name: 'About',
+		component: __webpack_require__(18)
+	}, {
+		path: '/login',
+		name: 'ログイン',
+		component: __webpack_require__(20)
+	}, {
+		path: '/register',
+		name: 'ユーザー登録',
+		component: __webpack_require__(23)
+	}, {
+		path: '/option',
+		name: '設定',
+		component: __webpack_require__(26)
+	}, {
+		path: '/schedule',
+		name: '講義予定',
+		component: __webpack_require__(48)
+	}],
+
 	scrollBehavior: function scrollBehavior(to, from, savedPosition) {
 		if (savedPosition) {
 			return savedPosition;
@@ -15155,8 +15180,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", [
-      _c("h1", { staticClass: "light-blue-text" }, [_vm._v("twiclaとは")]),
-      _vm._v(" "),
       _c("p", [
         _vm._v(
           "\n\t\ttwiclaは、手軽にTwitterと連携できる東工大専用の出席管理システムです。\n\t"
@@ -15244,7 +15267,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -15279,8 +15301,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", { staticClass: "light-blue-text" }, [_vm._v("ログイン")]),
-    _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col s12 m9 l7 input-field" }, [
         _c("input", {
@@ -15466,9 +15486,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -15510,8 +15527,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _vm._m(0),
-    _vm._v(" "),
     _c("div", { staticClass: "col s12 m9 l7 input-field" }, [
       _c("input", {
         directives: [
@@ -15641,16 +15656,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col s12" }, [
-      _c("h1", { staticClass: "light-blue-text" }, [_vm._v("ユーザー登録")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -15714,7 +15720,6 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_http__ = __webpack_require__(3);
-//
 //
 //
 //
@@ -16669,8 +16674,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", { staticClass: "light-blue-text" }, [_vm._v("設定")]),
-    _vm._v(" "),
     _c("h2", { staticClass: "indigo-text" }, [_vm._v("icalファイル")]),
     _vm._v(" "),
     _c("p", [
@@ -16828,7 +16831,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -16898,8 +16900,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", { staticClass: "light-blue-text" }, [_vm._v("スケジュール")]),
-    _vm._v(" "),
     _vm._m(0),
     _vm._v(" "),
     _c(
@@ -18103,7 +18103,7 @@ exports = module.exports = __webpack_require__(57)(false);
 
 
 // module
-exports.push([module.i, "\n#user-icon-initial[data-v-78a221df] {\r\n\tdisplay: block;\r\n\ttext-align: center;\r\n\tfont-size: 2.0em;\r\n\tline-height: 60px;\r\n\twidth: 100%;\r\n\theight: 100%;\n}\n#logout[data-v-78a221df] {\r\n\tcursor: pointer;\n}\r\n", ""]);
+exports.push([module.i, "\n#user-icon-initial[data-v-78a221df] {\n\tdisplay: block;\n\ttext-align: center;\n\tfont-size: 2.0em;\n\tline-height: 60px;\n\twidth: 100%;\n\theight: 100%;\n}\n#logout[data-v-78a221df] {\n\tcursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -18503,16 +18503,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	mounted: function mounted() {
@@ -18598,20 +18588,22 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c(
-        "li",
-        [
-          _c(
-            "router-link",
-            { staticClass: "sidenav-close", attrs: { to: "/schedule" } },
+      this.$store.getters.isAuthenticated
+        ? _c(
+            "li",
             [
-              _c("i", { staticClass: "material-icons" }, [_vm._v("event")]),
-              _vm._v("講義日程")
-            ]
+              _c(
+                "router-link",
+                { staticClass: "sidenav-close", attrs: { to: "/schedule" } },
+                [
+                  _c("i", { staticClass: "material-icons" }, [_vm._v("event")]),
+                  _vm._v("講義日程")
+                ]
+              )
+            ],
+            1
           )
-        ],
-        1
-      ),
+        : _vm._e(),
       _vm._v(" "),
       this.$store.getters.isAuthenticated
         ? _c(
@@ -18681,124 +18673,147 @@ var render = function() {
     _vm._v(" "),
     _c("header", { staticClass: "navbar-fixed" }, [
       _c("nav", [
-        _c("div", { staticClass: "nav-wrapper light-blue" }, [
-          _c(
-            "a",
-            {
-              staticClass: "left hide-on-med-and-down brand-logo",
-              attrs: { href: "/" }
-            },
-            [_vm._v("twicla")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "hide-on-large-only",
-              staticStyle: { "font-size": "1.2em" },
-              attrs: { href: "" }
-            },
-            [_vm._v("twicla")]
-          ),
-          _vm._v(" "),
-          _vm._m(1),
-          _vm._v(" "),
-          _c("ul", { staticClass: "right hide-on-med-and-down" }, [
+        _c(
+          "div",
+          { staticClass: "nav-wrapper light-blue" },
+          [
             _c(
-              "li",
+              "div",
+              { staticClass: "hide-on-med-and-down left" },
               [
                 _c(
                   "router-link",
-                  { staticClass: "sidenav-close", attrs: { to: "/about" } },
-                  [_vm._v("About")]
-                )
+                  { staticClass: "breadcrumb", attrs: { to: "/" } },
+                  [_vm._v("Twicla")]
+                ),
+                _vm._v(" "),
+                this.$route.path !== "/"
+                  ? _c(
+                      "router-link",
+                      {
+                        staticClass: "breadcrumb",
+                        attrs: { to: this.$route.path }
+                      },
+                      [_vm._v(_vm._s(this.$route.name))]
+                    )
+                  : _vm._e()
               ],
               1
             ),
             _vm._v(" "),
-            this.$store.getters.isAuthenticated
-              ? _c(
-                  "li",
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "sidenav-close",
-                        attrs: { to: "/schedule" }
-                      },
-                      [_vm._v("講義日程")]
-                    )
-                  ],
-                  1
-                )
-              : _vm._e(),
+            _c(
+              "router-link",
+              {
+                staticClass: "hide-on-large-only",
+                staticStyle: { "font-size": "1.3em" },
+                attrs: { to: this.$route.path }
+              },
+              [_vm._v(_vm._s(this.$route.name))]
+            ),
             _vm._v(" "),
-            this.$store.getters.isAuthenticated
-              ? _c(
-                  "li",
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "sidenav-close",
-                        attrs: { to: "/option" }
-                      },
-                      [_vm._v("設定")]
-                    )
-                  ],
-                  1
-                )
-              : _vm._e(),
+            _vm._m(1),
             _vm._v(" "),
-            this.$store.getters.isAuthenticated
-              ? _c("li", [
+            _c("ul", { staticClass: "right hide-on-med-and-down" }, [
+              _c(
+                "li",
+                [
                   _c(
-                    "a",
-                    {
-                      staticClass: "sidenav-close",
-                      on: {
-                        click: function($event) {
-                          _vm.logout()
-                        }
-                      }
-                    },
-                    [_vm._v("ログアウト")]
+                    "router-link",
+                    { staticClass: "sidenav-close", attrs: { to: "/about" } },
+                    [_vm._v("About")]
                   )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            !this.$store.getters.isAuthenticated
-              ? _c(
-                  "li",
-                  [
+                ],
+                1
+              ),
+              _vm._v(" "),
+              this.$store.getters.isAuthenticated
+                ? _c(
+                    "li",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "sidenav-close",
+                          attrs: { to: "/schedule" }
+                        },
+                        [_vm._v("講義日程")]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              this.$store.getters.isAuthenticated
+                ? _c(
+                    "li",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "sidenav-close",
+                          attrs: { to: "/option" }
+                        },
+                        [_vm._v("設定")]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              this.$store.getters.isAuthenticated
+                ? _c("li", [
                     _c(
-                      "router-link",
-                      { staticClass: "sidenav-close", attrs: { to: "/login" } },
-                      [_vm._v("ログイン")]
-                    )
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            !this.$store.getters.isAuthenticated
-              ? _c(
-                  "li",
-                  [
-                    _c(
-                      "router-link",
+                      "a",
                       {
                         staticClass: "sidenav-close",
-                        attrs: { to: "/register" }
+                        on: {
+                          click: function($event) {
+                            _vm.logout()
+                          }
+                        }
                       },
-                      [_vm._v("ユーザー登録")]
+                      [_vm._v("ログアウト")]
                     )
-                  ],
-                  1
-                )
-              : _vm._e()
-          ])
-        ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              !this.$store.getters.isAuthenticated
+                ? _c(
+                    "li",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "sidenav-close",
+                          attrs: { to: "/login" }
+                        },
+                        [_vm._v("ログイン")]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !this.$store.getters.isAuthenticated
+                ? _c(
+                    "li",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "sidenav-close",
+                          attrs: { to: "/register" }
+                        },
+                        [_vm._v("ユーザー登録")]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e()
+            ])
+          ],
+          1
+        )
       ])
     ])
   ])
@@ -18839,15 +18854,28 @@ if (false) {
 }
 
 /***/ }),
-/* 62 */
+/* 62 */,
+/* 63 */,
+/* 64 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(71)
 /* template */
-var __vue_template__ = __webpack_require__(63)
+var __vue_template__ = __webpack_require__(72)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -18864,7 +18892,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\FooterBar.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Index.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -18873,9 +18901,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-51a56311", Component.options)
+    hotAPI.createRecord("data-v-384052eb", Component.options)
   } else {
-    hotAPI.reload("data-v-51a56311", Component.options)
+    hotAPI.reload("data-v-384052eb", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -18886,7 +18914,71 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 63 */
+/* 71 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_http__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			datePick: '',
+			schedule: {}
+		};
+	},
+	mounted: function mounted() {
+		var _this = this;
+
+		this.$store.dispatch('setCurrentUser').then(function () {
+			__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].get('schedule?user_id=' + _this.$store.getters.getUser.id, {}, function (res) {
+				_this.schedule = res.data;
+			}, function (error) {
+				M.toast({ html: '「設定」よりicalファイルの登録をしてください', classes: 'red white-text' });
+			});
+		}).catch(function () {
+			M.toast({ html: 'ログインしてください', classes: 'red white-text' });
+			_this.$router.push('/login');
+		});
+	},
+
+
+	methods: {
+		date: function date(timestamp) {
+			var date = new Date(timestamp * 1000);
+			var month = date.getMonth() + 1;
+			var day = date.getDate();
+			return month + '月' + day + '日';
+		},
+		time: function time(timestamp) {
+			var date = new Date(timestamp * 1000);
+			var hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+			var min = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+			return hour + ':' + min;
+		},
+		scheduleFilter: function scheduleFilter(schedule, needle) {
+			if (Object.keys(schedule).length === 0 || needle === '') return schedule;
+			var pickDate = new Date(needle);
+			return schedule.filter(function (record) {
+				var date = new Date(record.dtstart_array[2] * 1000);
+				return date.getYear() === pickDate.getYear() && date.getMonth() === pickDate.getMonth() && date.getDate() === pickDate.getDate();
+			});
+		}
+	}
+});
+
+/***/ }),
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -18900,32 +18992,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "footer",
-      {
-        staticClass: "page-footer blue-grey darken-1",
-        attrs: { id: "footer" }
-      },
-      [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col l6 s12" }, [
-              _c("h5", { staticClass: "white-text" }, [_vm._v("twicla")]),
-              _vm._v(" "),
-              _c("p", { staticClass: "blue-grey-text text-lighten-4" }, [
-                _vm._v("ツイッタラーのための出席管理ツール")
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "footer-copyright" }, [
-          _c("div", { staticClass: "container" }, [
-            _vm._v("\n\t\t\t© 2018 Arthur\n\t\t")
-          ])
-        ])
-      ]
-    )
+    return _c("div", [_c("p", [_vm._v("\n\t\tとっぷぺーじ\n\t")])])
   }
 ]
 render._withStripped = true
@@ -18933,15 +19000,9 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-51a56311", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-384052eb", module.exports)
   }
 }
-
-/***/ }),
-/* 64 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

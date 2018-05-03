@@ -32,7 +32,6 @@ import store from './stores/index.js'
 
 
 Vue.component('header-bar', require('./components/HeaderBar.vue'))
-Vue.component('footer-bar', require('./components/FooterBar.vue'))
 
 const app = new Vue({
 	router,

@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<h1 class="light-blue-text">ログイン</h1>
 		<div class="row">
 			<div class="col s12 m9 l7 input-field">
 				<input type="email" name="email" id="form_email" class="form-control" v-model="email" @keyup.enter="login" required autofocus>
