@@ -29,7 +29,7 @@
 		data() {
 			return {
 				datePick: '',
-				schedule: {},
+				schedule: [],
 			}
 		},
 
@@ -45,7 +45,7 @@
 			}
 
 			this.$store.dispatch('setCurrentUser').then(() => {
-				http.get('schedule?user_id=' + this.$store.getters.getUser.id, {}, res => {
+				http.get('schedule/list?user_id=' + this.$store.getters.getUser.id, {}, res => {
 					this.schedule = res.data
 				}, error => {
 					M.toast({html: '「設定」よりicalファイルの登録をしてください', classes: 'red white-text'})

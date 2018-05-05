@@ -21,12 +21,13 @@ Route::group(['middleware' => 'api'], function() {
 	// 認証が不要
 	Route::post('authenticate',  'AuthenticateController@authenticate');
 	Route::post('register', 'AuthenticateController@register');
-	Route::get('schedule', 'ScheduleController@list');
+	Route::get('schedule/list', 'ScheduleController@list');
+	Route::get('schedule/todayList', 'ScheduleController@todayList');
 	// 認証が必要
 	Route::group(['middleware' => 'jwt.auth'], function() {
 		Route::get('me',  'AuthenticateController@getCurrentUser');
 		Route::post('ics/register', 'IcsController@register');
 		Route::get('ics/get', 'IcsController@get');
+		Route::get('logout', 'AuthenticateController@logout')->middleware('jwt.refresh');
 	});
-
 });

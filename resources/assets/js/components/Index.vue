@@ -1,8 +1,13 @@
 <template>
 	<div>
-		<p>
-			とっぷぺーじ
-		</p>
+		<div class="collection">
+			<div class="collection-item">
+				{{ recentSchedule.summary }}
+			</div>
+		</div>
+		<button class="btn btn-large waves-effect waves-light">出席</button>
+		<button class="btn btn-large amber waves-effect waves-light">遅刻</button>
+		<button class="btn btn-large red waves-effect waves-light">欠席</button>
 	</div>
 </template>
 <script>
@@ -12,13 +17,26 @@
 		data() {
 			return {
 				datePick: '',
-				schedule: {},
+				schedule: [],
+			}
+		},
+
+		computed: {
+			recentSchedule() {
+				let recentRecord = {}
+				this.schedule.some((record) => {
+					if (record.dtend_array[2] * 1000 > new Date().getTime()) {
+						recentRecord = record
+						return true
+					}
+				}, this)
+				return recentRecord
 			}
 		},
 
 		mounted() {
 			this.$store.dispatch('setCurrentUser').then(() => {
-				http.get('schedule?user_id=' + this.$store.getters.getUser.id, {}, res => {
+				http.get('schedule/todayList?user_id=' + this.$store.getters.getUser.id, {}, res => {
 					this.schedule = res.data
 				}, error => {
 					M.toast({html: '「設定」よりicalファイルの登録をしてください', classes: 'red white-text'})
