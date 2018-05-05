@@ -1,13 +1,28 @@
 <template>
 	<div>
+		<h1 class="light-blue-text">Next class is...</h1>
 		<div class="collection">
-			<div class="collection-item">
-				{{ recentSchedule.summary }}
+			<div class="collection-item" v-if="Object.keys(recentSchedule).length !== 0">
+				<div>{{ recentSchedule.summary }}</div>
+				<div class="grey-text">
+					<i class="material-icons tiny">access_time</i>
+					{{ date(recentSchedule.dtstart_array[2]) }}
+					{{ time(recentSchedule.dtstart_array[2]) }}～{{ time(recentSchedule.dtend_array[2]) }}
+				</div>
+				<div class="grey-text">
+					<i class="material-icons tiny">location_city</i>
+					{{ recentSchedule.location }}
+				</div>
+			</div>
+			<div class="collection-item" v-else>
+				本日の講義はすでに終了しています
 			</div>
 		</div>
-		<button class="btn btn-large waves-effect waves-light">出席</button>
-		<button class="btn btn-large amber waves-effect waves-light">遅刻</button>
-		<button class="btn btn-large red waves-effect waves-light">欠席</button>
+		<div class="center-align">
+			<button class="btn btn-large waves-effect waves-light">出席</button>
+			<button class="btn btn-large amber waves-effect waves-light">遅刻</button>
+			<button class="btn btn-large red waves-effect waves-light">欠席</button>
+		</div>
 	</div>
 </template>
 <script>

@@ -15183,6 +15183,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -16147,30 +16162,69 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("h1", { staticClass: "light-blue-text" }, [_vm._v("Next class is...")]),
+    _vm._v(" "),
     _c("div", { staticClass: "collection" }, [
-      _c("div", { staticClass: "collection-item" }, [
-        _vm._v("\n\t\t\t" + _vm._s(_vm.recentSchedule.summary) + "\n\t\t")
-      ])
+      Object.keys(_vm.recentSchedule).length !== 0
+        ? _c("div", { staticClass: "collection-item" }, [
+            _c("div", [_vm._v(_vm._s(_vm.recentSchedule.summary))]),
+            _vm._v(" "),
+            _c("div", { staticClass: "grey-text" }, [
+              _c("i", { staticClass: "material-icons tiny" }, [
+                _vm._v("access_time")
+              ]),
+              _vm._v(
+                "\n\t\t\t\t" +
+                  _vm._s(_vm.date(_vm.recentSchedule.dtstart_array[2])) +
+                  "\n\t\t\t\t" +
+                  _vm._s(_vm.time(_vm.recentSchedule.dtstart_array[2])) +
+                  "～" +
+                  _vm._s(_vm.time(_vm.recentSchedule.dtend_array[2])) +
+                  "\n\t\t\t"
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "grey-text" }, [
+              _c("i", { staticClass: "material-icons tiny" }, [
+                _vm._v("location_city")
+              ]),
+              _vm._v(
+                "\n\t\t\t\t" + _vm._s(_vm.recentSchedule.location) + "\n\t\t\t"
+              )
+            ])
+          ])
+        : _c("div", { staticClass: "collection-item" }, [
+            _vm._v("\n\t\t\t本日の講義はすでに終了しています\n\t\t")
+          ])
     ]),
     _vm._v(" "),
-    _c("button", { staticClass: "btn btn-large waves-effect waves-light" }, [
-      _vm._v("出席")
-    ]),
-    _vm._v(" "),
-    _c(
-      "button",
-      { staticClass: "btn btn-large amber waves-effect waves-light" },
-      [_vm._v("遅刻")]
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      { staticClass: "btn btn-large red waves-effect waves-light" },
-      [_vm._v("欠席")]
-    )
+    _vm._m(0)
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "center-align" }, [
+      _c("button", { staticClass: "btn btn-large waves-effect waves-light" }, [
+        _vm._v("出席")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-large amber waves-effect waves-light" },
+        [_vm._v("遅刻")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-large red waves-effect waves-light" },
+        [_vm._v("欠席")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

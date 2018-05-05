@@ -27,7 +27,8 @@ class ScheduleController extends Controller
 		if (empty($record['ics_url'])) return \Response::json([], 400);
 		$ical = new ICal();
 		$ical->initUrl($record['ics_url']);
-		$ts = strtotime('7 May 2018');
+		// $ts = time();
+		$ts = strtotime('7 May 2018'); // debug
 		$schedule = $ical->eventsFromRange(date('Y-m-d', $ts).' 00:00:00', date('Y-m-d', $ts).' 23:59:00');
 		//$schedule = $ical->eventsFromInterval('1 day');
 		return \Response::json($schedule);
