@@ -15249,8 +15249,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].get('attendance/get?user_id=' + _this.$store.getters.getUser.id, {}, function (res) {
 					res.data.forEach(function (record) {
 						_this.submitted.push(record.uid);
-						_this.standby = true;
 					}, _this);
+					_this.standby = true;
 				}, function (error) {
 					M.toast({ html: 'エラーが発生しました', classes: 'red white-text' });
 				});

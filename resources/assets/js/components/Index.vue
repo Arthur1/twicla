@@ -70,8 +70,8 @@
 					http.get('attendance/get?user_id=' + this.$store.getters.getUser.id, {}, res => {
 						res.data.forEach(record => {
 							this.submitted.push(record.uid)
-							this.standby = true
 						}, this)
+						this.standby = true
 					}, error => {
 						M.toast({html: 'エラーが発生しました', classes: 'red white-text'})
 					})
