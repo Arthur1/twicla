@@ -12476,6 +12476,10 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
 		path: '/schedule',
 		name: '講義予定',
 		component: __webpack_require__(51)
+	}, {
+		path: '/attendance',
+		name: '出欠記録',
+		component: __webpack_require__(76)
 	}],
 
 	scrollBehavior: function scrollBehavior(to, from, savedPosition) {
@@ -18875,6 +18879,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	mounted: function mounted() {
@@ -18975,6 +18981,23 @@ var render = function() {
                 [
                   _c("i", { staticClass: "material-icons" }, [_vm._v("event")]),
                   _vm._v("講義日程")
+                ]
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.isAuthenticated
+        ? _c(
+            "li",
+            [
+              _c(
+                "router-link",
+                { staticClass: "sidenav-close", attrs: { to: "/attendance" } },
+                [
+                  _c("i", { staticClass: "material-icons" }, [_vm._v("save")]),
+                  _vm._v("出欠記録")
                 ]
               )
             ],
@@ -19134,6 +19157,23 @@ var render = function() {
                           attrs: { to: "/schedule" }
                         },
                         [_vm._v("講義日程")]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isAuthenticated
+                ? _c(
+                    "li",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "sidenav-close",
+                          attrs: { to: "/attendance" }
+                        },
+                        [_vm._v("出欠記録")]
                       )
                     ],
                     1
@@ -19414,6 +19454,195 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-38bdac0f", module.exports)
+  }
+}
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(77)
+/* template */
+var __vue_template__ = __webpack_require__(78)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\Attendance.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-376cf120", Component.options)
+  } else {
+    hotAPI.reload("data-v-376cf120", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 77 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_http__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			standby: false,
+			countData: []
+		};
+	},
+	mounted: function mounted() {
+		var _this = this;
+
+		this.$store.dispatch('setCurrentUser').then(function () {
+			__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].get('attendance/count?user_id=' + _this.$store.getters.getUser.id, {}, function (res) {
+				_this.countData = res.data;
+				_this.standby = true;
+			}, function (error) {
+				M.toast({ html: 'エラーが発生しました', classes: 'red white-text' });
+				_this.standby = true;
+			});
+		}).catch(function () {
+			M.toast({ html: 'ログインしてください', classes: 'red white-text' });
+			_this.$router.push('/login');
+		});
+	},
+
+
+	methods: {
+		setDefault: function setDefault(value) {
+			var defaultValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+			if (typeof value == 'undefined') {
+				return defaultValue;
+			} else {
+				return value;
+			}
+		}
+	}
+});
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      !_vm.standby
+        ? _c("pre-loader")
+        : _c(
+            "table",
+            { staticClass: "highlight" },
+            [
+              _c("tr", [
+                _c("th", [_vm._v("講義名")]),
+                _vm._v(" "),
+                _c("th", { staticClass: "teal-text text-darken-1" }, [
+                  _vm._v("出席")
+                ]),
+                _vm._v(" "),
+                _c("th", { staticClass: "amber-text text-darken-1" }, [
+                  _vm._v("遅刻")
+                ]),
+                _vm._v(" "),
+                _c("th", { staticClass: "red-text text-darken-1" }, [
+                  _vm._v("欠席")
+                ]),
+                _vm._v(" "),
+                _c("th", [_vm._v("合計")])
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.countData, function(record, key) {
+                return _c("tr", [
+                  _c("td", [_vm._v(_vm._s(key))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(_vm.setDefault(record[0], 0)))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(_vm.setDefault(record[1], 0)))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(_vm.setDefault(record[2], 0)))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(
+                        _vm.setDefault(record[0], 0) +
+                          _vm.setDefault(record[1], 0) +
+                          _vm.setDefault(record[2], 0)
+                      )
+                    )
+                  ])
+                ])
+              })
+            ],
+            2
+          )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-376cf120", module.exports)
   }
 }
 

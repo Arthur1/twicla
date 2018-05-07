@@ -37,6 +37,11 @@ export default new VueRouter({
 			name: '講義予定',
 			component: require('./components/Schedule.vue'),
 		},
+		{
+			path: '/attendance',
+			name: '出欠記録',
+			component: require('./components/Attendance.vue'),
+		},
 	],
 
 	scrollBehavior (to, from, savedPosition) {

@@ -15,6 +15,7 @@
 			</li>
 			<li><router-link class="sidenav-close" to="/about"><i class="material-icons">announcement</i>About</router-link></li>
 			<li v-if="isAuthenticated"><router-link class="sidenav-close" to="/schedule"><i class="material-icons">event</i>講義日程</router-link></li>
+			<li v-if="isAuthenticated"><router-link class="sidenav-close" to="/attendance"><i class="material-icons">save</i>出欠記録</router-link></li>
 			<li v-if="isAuthenticated"><router-link class="sidenav-close" to="/option"><i class="material-icons">build</i>設定</router-link></li>
 			<li class="divider"></li>
 			<li v-if="isAuthenticated"><a class="sidenav-close" @click="logout()" id="logout">ログアウト</a></li>
@@ -35,6 +36,7 @@
 					<ul class="right hide-on-med-and-down">
 						<li><router-link class="sidenav-close" to="/about">About</router-link></li>
 						<li v-if="isAuthenticated"><router-link class="sidenav-close" to="/schedule">講義日程</router-link></li>
+						<li v-if="isAuthenticated"><router-link class="sidenav-close" to="/attendance">出欠記録</router-link></li>
 						<li v-if="isAuthenticated"><router-link class="sidenav-close" to="/option">設定</router-link></li>
 						<li v-if="isAuthenticated"><a class="sidenav-close" @click="logout()">ログアウト</a></li>
 						<li v-if="! isAuthenticated"><router-link class="sidenav-close" to="/login">ログイン</router-link></li>
