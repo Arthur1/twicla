@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Option extends Model
+class Attendance extends Model
 {
 	/**
 	 * ModelのTimestampを更新するか

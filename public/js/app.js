@@ -15198,6 +15198,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -15205,7 +15210,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	data: function data() {
 		return {
 			datePick: '',
-			schedule: []
+			schedule: [],
+			submitted: []
 		};
 	},
 
@@ -15220,6 +15226,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				}
 			}, this);
 			return recentRecord;
+		},
+		isSubmitted: function isSubmitted() {
+			var recentRecord = this.recentSchedule;
+			return this.submitted.indexOf(recentRecord.uid) >= 0;
 		}
 	},
 
@@ -15229,6 +15239,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		this.$store.dispatch('setCurrentUser').then(function () {
 			__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].get('schedule/todayList?user_id=' + _this.$store.getters.getUser.id, {}, function (res) {
 				_this.schedule = res.data;
+				__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].get('attendance/get?user_id=' + _this.$store.getters.getUser.id, {}, function (res) {
+					res.data.forEach(function (record) {
+						_this.submitted.push(record.uid);
+					}, _this);
+				}, function (error) {
+					M.toast({ html: 'エラーが発生しました', classes: 'red white-text' });
+				});
 			}, function (error) {
 				M.toast({ html: '「設定」よりicalファイルの登録をしてください', classes: 'red white-text' });
 			});
@@ -15258,6 +15275,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return schedule.filter(function (record) {
 				var date = new Date(record.dtstart_array[2] * 1000);
 				return date.getYear() === pickDate.getYear() && date.getMonth() === pickDate.getMonth() && date.getDate() === pickDate.getDate();
+			});
+		},
+
+		sendAttendance: function sendAttendance(status) {
+			var _this2 = this;
+
+			var params = {
+				class_name: this.recentSchedule.summary,
+				uid: this.recentSchedule.uid,
+				user_id: this.$store.getters.getUser.id
+			};
+			switch (status) {
+				case '出席':
+					params.status = 0;
+					break;
+				case '遅刻':
+					params.status = 1;
+					params.late_minutes = 0;
+					break;
+				case '欠席':
+					params.status = 2;
+					break;
+			}
+			__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].post('attendance/register', params, function (res) {
+				M.toast({ html: status + '登録に成功しました', classes: 'teal white-text' });
+				_this2.submitted.push(params.uid);
+			}, function (error) {
+				M.toast({ html: status + '登録に失敗しました', classes: 'red white-text' });
 			});
 		}
 	}
@@ -16198,33 +16243,78 @@ var render = function() {
           ])
     ]),
     _vm._v(" "),
-    _vm._m(0)
+    !_vm.isSubmitted
+      ? _c("div", { staticClass: "center-align" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-large waves-effect waves-light",
+              on: {
+                click: function($event) {
+                  _vm.sendAttendance("出席")
+                }
+              }
+            },
+            [_vm._v("出席")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-large amber waves-effect waves-light",
+              on: {
+                click: function($event) {
+                  _vm.sendAttendance("遅刻")
+                }
+              }
+            },
+            [_vm._v("遅刻")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-large red waves-effect waves-light",
+              on: {
+                click: function($event) {
+                  _vm.sendAttendance("欠席")
+                }
+              }
+            },
+            [_vm._v("欠席")]
+          )
+        ])
+      : _c("div", { staticClass: "center-align" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-large waves-effect waves-light",
+              attrs: { disabled: "" }
+            },
+            [_vm._v("出席")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-large waves-effect waves-light",
+              attrs: { disabled: "" }
+            },
+            [_vm._v("遅刻")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-large waves-effect waves-light",
+              attrs: { disabled: "" }
+            },
+            [_vm._v("欠席")]
+          )
+        ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "center-align" }, [
-      _c("button", { staticClass: "btn btn-large waves-effect waves-light" }, [
-        _vm._v("出席")
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-large amber waves-effect waves-light" },
-        [_vm._v("遅刻")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-large red waves-effect waves-light" },
-        [_vm._v("欠席")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
