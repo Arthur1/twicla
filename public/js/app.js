@@ -584,7 +584,6 @@ module.exports = g;
 			return response;
 		}, function (error) {
 			// Also, if we receive a Bad Request / Unauthorized error
-			console.log(error);
 			return Promise.reject(error);
 		});
 	}
@@ -12166,6 +12165,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('header-bar', __webpack_require__(57));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('pre-loader', __webpack_require__(71));
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 	router: __WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */],
@@ -15203,13 +15203,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
-			datePick: '',
+			standby: false,
 			schedule: [],
 			submitted: []
 		};
@@ -15242,6 +15245,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].get('attendance/get?user_id=' + _this.$store.getters.getUser.id, {}, function (res) {
 					res.data.forEach(function (record) {
 						_this.submitted.push(record.uid);
+						_this.standby = true;
 					}, _this);
 				}, function (error) {
 					M.toast({ html: 'エラーが発生しました', classes: 'red white-text' });
@@ -16206,113 +16210,130 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h1", { staticClass: "light-blue-text" }, [_vm._v("Next class is...")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "collection" }, [
-      Object.keys(_vm.recentSchedule).length !== 0
-        ? _c("div", { staticClass: "collection-item" }, [
-            _c("div", [_vm._v(_vm._s(_vm.recentSchedule.summary))]),
-            _vm._v(" "),
-            _c("div", { staticClass: "grey-text" }, [
-              _c("i", { staticClass: "material-icons tiny" }, [
-                _vm._v("access_time")
-              ]),
-              _vm._v(
-                "\n\t\t\t\t" +
-                  _vm._s(_vm.date(_vm.recentSchedule.dtstart_array[2])) +
-                  "\n\t\t\t\t" +
-                  _vm._s(_vm.time(_vm.recentSchedule.dtstart_array[2])) +
-                  "～" +
-                  _vm._s(_vm.time(_vm.recentSchedule.dtend_array[2])) +
-                  "\n\t\t\t"
-              )
+  return _c(
+    "div",
+    [
+      _c("h1", { staticClass: "light-blue-text" }, [
+        _vm._v("Next class is...")
+      ]),
+      _vm._v(" "),
+      !_vm.standby
+        ? _c("pre-loader")
+        : _c("div", [
+            _c("div", { staticClass: "collection" }, [
+              Object.keys(_vm.recentSchedule).length !== 0
+                ? _c("div", { staticClass: "collection-item" }, [
+                    _c("div", [_vm._v(_vm._s(_vm.recentSchedule.summary))]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "grey-text" }, [
+                      _c("i", { staticClass: "material-icons tiny" }, [
+                        _vm._v("access_time")
+                      ]),
+                      _vm._v(
+                        "\n\t\t\t\t\t" +
+                          _vm._s(
+                            _vm.date(_vm.recentSchedule.dtstart_array[2])
+                          ) +
+                          "\n\t\t\t\t\t" +
+                          _vm._s(
+                            _vm.time(_vm.recentSchedule.dtstart_array[2])
+                          ) +
+                          "～" +
+                          _vm._s(_vm.time(_vm.recentSchedule.dtend_array[2])) +
+                          "\n\t\t\t\t"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "grey-text" }, [
+                      _c("i", { staticClass: "material-icons tiny" }, [
+                        _vm._v("location_city")
+                      ]),
+                      _vm._v(
+                        "\n\t\t\t\t\t" +
+                          _vm._s(_vm.recentSchedule.location) +
+                          "\n\t\t\t\t"
+                      )
+                    ])
+                  ])
+                : _c("div", { staticClass: "collection-item" }, [
+                    _vm._v("\n\t\t\t\t本日の講義はすでに終了しています\n\t\t\t")
+                  ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "grey-text" }, [
-              _c("i", { staticClass: "material-icons tiny" }, [
-                _vm._v("location_city")
-              ]),
-              _vm._v(
-                "\n\t\t\t\t" + _vm._s(_vm.recentSchedule.location) + "\n\t\t\t"
-              )
-            ])
+            !_vm.isSubmitted
+              ? _c("div", { staticClass: "center-align" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-large waves-effect waves-light",
+                      on: {
+                        click: function($event) {
+                          _vm.sendAttendance("出席")
+                        }
+                      }
+                    },
+                    [_vm._v("出席")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn btn-large amber waves-effect waves-light",
+                      on: {
+                        click: function($event) {
+                          _vm.sendAttendance("遅刻")
+                        }
+                      }
+                    },
+                    [_vm._v("遅刻")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-large red waves-effect waves-light",
+                      on: {
+                        click: function($event) {
+                          _vm.sendAttendance("欠席")
+                        }
+                      }
+                    },
+                    [_vm._v("欠席")]
+                  )
+                ])
+              : _c("div", { staticClass: "center-align" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-large waves-effect waves-light",
+                      attrs: { disabled: "" }
+                    },
+                    [_vm._v("出席")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-large waves-effect waves-light",
+                      attrs: { disabled: "" }
+                    },
+                    [_vm._v("遅刻")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-large waves-effect waves-light",
+                      attrs: { disabled: "" }
+                    },
+                    [_vm._v("欠席")]
+                  )
+                ])
           ])
-        : _c("div", { staticClass: "collection-item" }, [
-            _vm._v("\n\t\t\t本日の講義はすでに終了しています\n\t\t")
-          ])
-    ]),
-    _vm._v(" "),
-    !_vm.isSubmitted
-      ? _c("div", { staticClass: "center-align" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-large waves-effect waves-light",
-              on: {
-                click: function($event) {
-                  _vm.sendAttendance("出席")
-                }
-              }
-            },
-            [_vm._v("出席")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-large amber waves-effect waves-light",
-              on: {
-                click: function($event) {
-                  _vm.sendAttendance("遅刻")
-                }
-              }
-            },
-            [_vm._v("遅刻")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-large red waves-effect waves-light",
-              on: {
-                click: function($event) {
-                  _vm.sendAttendance("欠席")
-                }
-              }
-            },
-            [_vm._v("欠席")]
-          )
-        ])
-      : _c("div", { staticClass: "center-align" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-large waves-effect waves-light",
-              attrs: { disabled: "" }
-            },
-            [_vm._v("出席")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-large waves-effect waves-light",
-              attrs: { disabled: "" }
-            },
-            [_vm._v("遅刻")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-large waves-effect waves-light",
-              attrs: { disabled: "" }
-            },
-            [_vm._v("欠席")]
-          )
-        ])
-  ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -16474,6 +16495,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -16508,6 +16532,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("p", [_vm._v("\n\t\t以下の必要事項を記入してログインしてください\n\t")]),
+    _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col s12 m9 l7 input-field" }, [
         _c("input", {
@@ -16693,6 +16719,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -16734,6 +16765,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
+    _vm._m(0),
+    _vm._v(" "),
     _c("div", { staticClass: "col s12 m9 l7 input-field" }, [
       _c("input", {
         directives: [
@@ -16863,7 +16896,16 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col s12" }, [
+      _c("p", [_vm._v("\n\t\t\t以下の必要事項を記入してください。\n\t\t")])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -16991,7 +17033,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h2", { staticClass: "indigo-text" }, [_vm._v("icalファイル")]),
+    _c("h1", { staticClass: "light-blue-text" }, [_vm._v("icalファイル")]),
     _vm._v(" "),
     _c("p", [
       _vm._v(
@@ -17057,7 +17099,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("h2", { staticClass: "indigo-text" }, [_vm._v("Twitter連携")])
+    _c("h1", { staticClass: "light-blue-text" }, [_vm._v("Twitter連携")])
   ])
 }
 var staticRenderFns = []
@@ -17148,12 +17190,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
+			standby: false,
 			datePick: '',
 			schedule: []
 		};
@@ -17174,8 +17218,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		this.$store.dispatch('setCurrentUser').then(function () {
 			__WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].get('schedule/list?user_id=' + _this.$store.getters.getUser.id, {}, function (res) {
 				_this.schedule = res.data;
+				_this.standby = true;
 			}, function (error) {
 				M.toast({ html: '「設定」よりicalファイルの登録をしてください', classes: 'red white-text' });
+				_this.standby = true;
 			});
 		}).catch(function () {
 			M.toast({ html: 'ログインしてください', classes: 'red white-text' });
@@ -17216,41 +17262,49 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._m(0),
-    _vm._v(" "),
-    _c(
-      "ul",
-      { staticClass: "collection" },
-      _vm._l(_vm.scheduleFilter(_vm.schedule, _vm.datePick), function(record) {
-        return _c("li", { staticClass: "collection-item" }, [
-          _c("div", [_vm._v(_vm._s(record.summary))]),
-          _vm._v(" "),
-          _c("div", { staticClass: "grey-text" }, [
-            _c("i", { staticClass: "material-icons tiny" }, [
-              _vm._v("access_time")
-            ]),
-            _vm._v(
-              "\n\t\t\t\t" +
-                _vm._s(_vm.date(record.dtstart_array[2])) +
-                "\n\t\t\t\t" +
-                _vm._s(_vm.time(record.dtstart_array[2])) +
-                "～" +
-                _vm._s(_vm.time(record.dtend_array[2])) +
-                "\n\t\t\t"
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "grey-text" }, [
-            _c("i", { staticClass: "material-icons tiny" }, [
-              _vm._v("location_city")
-            ]),
-            _vm._v("\n\t\t\t\t" + _vm._s(record.location) + "\n\t\t\t")
-          ])
-        ])
-      })
-    )
-  ])
+  return _c(
+    "div",
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      !_vm.standby
+        ? _c("pre-loader")
+        : _c(
+            "ul",
+            { staticClass: "collection" },
+            _vm._l(_vm.scheduleFilter(_vm.schedule, _vm.datePick), function(
+              record
+            ) {
+              return _c("li", { staticClass: "collection-item" }, [
+                _c("div", [_vm._v(_vm._s(record.summary))]),
+                _vm._v(" "),
+                _c("div", { staticClass: "grey-text" }, [
+                  _c("i", { staticClass: "material-icons tiny" }, [
+                    _vm._v("access_time")
+                  ]),
+                  _vm._v(
+                    "\n\t\t\t\t" +
+                      _vm._s(_vm.date(record.dtstart_array[2])) +
+                      "\n\t\t\t\t" +
+                      _vm._s(_vm.time(record.dtstart_array[2])) +
+                      "～" +
+                      _vm._s(_vm.time(record.dtend_array[2])) +
+                      "\n\t\t\t"
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "grey-text" }, [
+                  _c("i", { staticClass: "material-icons tiny" }, [
+                    _vm._v("location_city")
+                  ]),
+                  _vm._v("\n\t\t\t\t" + _vm._s(record.location) + "\n\t\t\t")
+                ])
+              ])
+            })
+          )
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -19188,6 +19242,180 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(73)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(75)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-38bdac0f"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\Preloader.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-38bdac0f", Component.options)
+  } else {
+    hotAPI.reload("data-v-38bdac0f", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 72 */,
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(74);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(61)("6c350c17", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-38bdac0f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Preloader.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-38bdac0f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Preloader.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(60)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.wrapper[data-v-38bdac0f] {\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-pack: center;\n\t    -ms-flex-pack: center;\n\t        justify-content: center;\n\t-webkit-box-align: center;\n\t    -ms-flex-align: center;\n\t        align-items: center;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "wrapper" }, [
+      _c("div", { staticClass: "preloader-wrapper big active" }, [
+        _c("div", { staticClass: "spinner-layer spinner-blue" }, [
+          _c("div", { staticClass: "circle-clipper left" }, [
+            _c("div", { staticClass: "circle" })
+          ]),
+          _c("div", { staticClass: "gap-patch" }, [
+            _c("div", { staticClass: "circle" })
+          ]),
+          _c("div", { staticClass: "circle-clipper right" }, [
+            _c("div", { staticClass: "circle" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "spinner-layer spinner-red" }, [
+          _c("div", { staticClass: "circle-clipper left" }, [
+            _c("div", { staticClass: "circle" })
+          ]),
+          _c("div", { staticClass: "gap-patch" }, [
+            _c("div", { staticClass: "circle" })
+          ]),
+          _c("div", { staticClass: "circle-clipper right" }, [
+            _c("div", { staticClass: "circle" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "spinner-layer spinner-yellow" }, [
+          _c("div", { staticClass: "circle-clipper left" }, [
+            _c("div", { staticClass: "circle" })
+          ]),
+          _c("div", { staticClass: "gap-patch" }, [
+            _c("div", { staticClass: "circle" })
+          ]),
+          _c("div", { staticClass: "circle-clipper right" }, [
+            _c("div", { staticClass: "circle" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "spinner-layer spinner-green" }, [
+          _c("div", { staticClass: "circle-clipper left" }, [
+            _c("div", { staticClass: "circle" })
+          ]),
+          _c("div", { staticClass: "gap-patch" }, [
+            _c("div", { staticClass: "circle" })
+          ]),
+          _c("div", { staticClass: "circle-clipper right" }, [
+            _c("div", { staticClass: "circle" })
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-38bdac0f", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

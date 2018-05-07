@@ -1,32 +1,35 @@
 <template>
 	<div>
 		<h1 class="light-blue-text">Next class is...</h1>
-		<div class="collection">
-			<div class="collection-item" v-if="Object.keys(recentSchedule).length !== 0">
-				<div>{{ recentSchedule.summary }}</div>
-				<div class="grey-text">
-					<i class="material-icons tiny">access_time</i>
-					{{ date(recentSchedule.dtstart_array[2]) }}
-					{{ time(recentSchedule.dtstart_array[2]) }}～{{ time(recentSchedule.dtend_array[2]) }}
+		<pre-loader v-if="! standby"></pre-loader>
+		<div v-else>
+			<div class="collection">
+				<div class="collection-item" v-if="Object.keys(recentSchedule).length !== 0">
+					<div>{{ recentSchedule.summary }}</div>
+					<div class="grey-text">
+						<i class="material-icons tiny">access_time</i>
+						{{ date(recentSchedule.dtstart_array[2]) }}
+						{{ time(recentSchedule.dtstart_array[2]) }}～{{ time(recentSchedule.dtend_array[2]) }}
+					</div>
+					<div class="grey-text">
+						<i class="material-icons tiny">location_city</i>
+						{{ recentSchedule.location }}
+					</div>
 				</div>
-				<div class="grey-text">
-					<i class="material-icons tiny">location_city</i>
-					{{ recentSchedule.location }}
+				<div class="collection-item" v-else>
+					本日の講義はすでに終了しています
 				</div>
 			</div>
-			<div class="collection-item" v-else>
-				本日の講義はすでに終了しています
+			<div class="center-align" v-if="! isSubmitted">
+				<button class="btn btn-large waves-effect waves-light" @click="sendAttendance('出席')">出席</button>
+				<button class="btn btn-large amber waves-effect waves-light" @click="sendAttendance('遅刻')">遅刻</button>
+				<button class="btn btn-large red waves-effect waves-light" @click="sendAttendance('欠席')">欠席</button>
 			</div>
-		</div>
-		<div class="center-align" v-if="! isSubmitted">
-			<button class="btn btn-large waves-effect waves-light" @click="sendAttendance('出席')">出席</button>
-			<button class="btn btn-large amber waves-effect waves-light" @click="sendAttendance('遅刻')">遅刻</button>
-			<button class="btn btn-large red waves-effect waves-light" @click="sendAttendance('欠席')">欠席</button>
-		</div>
-		<div v-else class="center-align">
-			<button class="btn btn-large waves-effect waves-light" disabled>出席</button>
-			<button class="btn btn-large waves-effect waves-light" disabled>遅刻</button>
-			<button class="btn btn-large waves-effect waves-light" disabled>欠席</button>
+			<div v-else class="center-align">
+				<button class="btn btn-large waves-effect waves-light" disabled>出席</button>
+				<button class="btn btn-large waves-effect waves-light" disabled>遅刻</button>
+				<button class="btn btn-large waves-effect waves-light" disabled>欠席</button>
+			</div>
 		</div>
 	</div>
 </template>
@@ -36,7 +39,7 @@
 	export default {
 		data() {
 			return {
-				datePick: '',
+				standby: false,
 				schedule: [],
 				submitted: [],
 			}
@@ -67,6 +70,7 @@
 					http.get('attendance/get?user_id=' + this.$store.getters.getUser.id, {}, res => {
 						res.data.forEach(record => {
 							this.submitted.push(record.uid)
+							this.standby = true
 						}, this)
 					}, error => {
 						M.toast({html: 'エラーが発生しました', classes: 'red white-text'})

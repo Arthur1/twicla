@@ -6,7 +6,8 @@
 				<label for="form_date">日時</label>
 			</div>
 		</div>
-		<ul class="collection">
+		<pre-loader v-if="! standby"></pre-loader>
+		<ul v-else class="collection">
 			<li v-for="record in scheduleFilter(schedule, datePick)" class="collection-item">
 				<div>{{ record.summary }}</div>
 				<div class="grey-text">
@@ -28,6 +29,7 @@
 	export default {
 		data() {
 			return {
+				standby: false,
 				datePick: '',
 				schedule: [],
 			}
@@ -47,8 +49,10 @@
 			this.$store.dispatch('setCurrentUser').then(() => {
 				http.get('schedule/list?user_id=' + this.$store.getters.getUser.id, {}, res => {
 					this.schedule = res.data
+					this.standby = true
 				}, error => {
 					M.toast({html: '「設定」よりicalファイルの登録をしてください', classes: 'red white-text'})
+					this.standby = true
 				})
 			}).catch(() => {
 				M.toast({html: 'ログインしてください', classes: 'red white-text'})

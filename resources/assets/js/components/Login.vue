@@ -1,5 +1,8 @@
 <template>
 	<div>
+		<p>
+			以下の必要事項を記入してログインしてください
+		</p>
 		<div class="row">
 			<div class="col s12 m9 l7 input-field">
 				<input type="email" name="email" id="form_email" class="form-control" v-model="email" @keyup.enter="login" required autofocus>

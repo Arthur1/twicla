@@ -53,7 +53,6 @@ export default {
 	    	return response
 	    }, error => {
 	    	// Also, if we receive a Bad Request / Unauthorized error
-	    	console.log(error)
 	    	return Promise.reject(error)
 	    })
 	}

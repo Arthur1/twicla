@@ -1,5 +1,10 @@
 <template>
 	<div class="row">
+		<div class="col s12">
+			<p>
+				以下の必要事項を記入してください。
+			</p>
+		</div>
 		<div class="col s12 m9 l7 input-field">
 			<input type="text" name="name" id="form_name" class="form-control" v-model="name" required>
 			<label for="form_name">ユーザ名</label>

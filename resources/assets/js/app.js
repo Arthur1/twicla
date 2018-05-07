@@ -32,6 +32,7 @@ import store from './stores/index.js'
 
 
 Vue.component('header-bar', require('./components/HeaderBar.vue'))
+Vue.component('pre-loader', require('./components/Preloader.vue'))
 
 const app = new Vue({
 	router,

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h2 class="indigo-text">icalファイル</h2>
+		<h1 class="light-blue-text">icalファイル</h1>
 		<p>
 			OCW-iから取得できるicalファイルのurlを入力してください。
 		</p>
@@ -13,7 +13,7 @@
 				<button type="submit" @click="registerIcs" class="btn btn-primary"><i class="material-icons right">send</i>登録</button>
 			</div>
 		</div>
-		<h2 class="indigo-text">Twitter連携</h2>
+		<h1 class="light-blue-text">Twitter連携</h1>
 	</div>
 </template>
 <script>
