@@ -15236,7 +15236,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		isSubmitted: function isSubmitted() {
 			var recentRecord = this.recentSchedule;
-			return this.submitted.indexOf(recentRecord.uid) >= 0;
+			return Object.keys(recentRecord).length == 0 || this.submitted.indexOf(recentRecord.uid) >= 0;
 		}
 	},
 

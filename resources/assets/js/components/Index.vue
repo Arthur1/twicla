@@ -59,7 +59,7 @@
 
 			isSubmitted() {
 				let recentRecord = this.recentSchedule
-				return this.submitted.indexOf(recentRecord.uid) >= 0
+				return Object.keys(recentRecord).length == 0 || this.submitted.indexOf(recentRecord.uid) >= 0
 			},
 		},
 
