@@ -16,10 +16,11 @@ class CreateAttendancesTable extends Migration
 		Schema::create('attendances', function (Blueprint $table) {
 			$table->integer('user_id')->unsigned();
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-			$table->string('uid')->unique();
+			$table->string('uid');
 			$table->string('class_name');
 			$table->tinyInteger('status');
 			$table->integer('late_minutes')->nullable();
+			$table->unique(['user_id', 'uid']);
 		});
 	}
 
