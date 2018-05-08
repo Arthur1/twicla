@@ -2,20 +2,24 @@
 	<div>
 		<pre-loader v-if="! standby"></pre-loader>
 		<table v-else class="highlight">
-			<tr>
-				<th>講義名</th>
-				<th class="teal-text text-darken-1">出席</th>
-				<th class="amber-text text-darken-1">遅刻</th>
-				<th class="red-text text-darken-1">欠席</th>
-				<th>合計</th>
-			</tr>
-			<tr v-for="(record, key) in countData">
-				<td>{{ key }}</td>
-				<td>{{ setDefault(record[0], 0) }}</td>
-				<td>{{ setDefault(record[1], 0) }}</td>
-				<td>{{ setDefault(record[2], 0) }}</td>
-				<td>{{ setDefault(record[0], 0) + setDefault(record[1], 0) + setDefault(record[2], 0) }}</td>
-			</tr>
+			<thead>
+				<tr>
+					<th>講義名</th>
+					<th class="teal-text text-darken-1">出席</th>
+					<th class="amber-text text-darken-1">遅刻</th>
+					<th class="red-text text-darken-1">欠席</th>
+					<th>合計</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="(record, key) in countData">
+					<td>{{ key }}</td>
+					<td>{{ setDefault(record[0], 0) }}</td>
+					<td>{{ setDefault(record[1], 0) }}</td>
+					<td>{{ setDefault(record[2], 0) }}</td>
+					<td>{{ setDefault(record[0], 0) + setDefault(record[1], 0) + setDefault(record[2], 0) }}</td>
+				</tr>
+			</tbody>
 		</table>
 	</div>
 </template>
